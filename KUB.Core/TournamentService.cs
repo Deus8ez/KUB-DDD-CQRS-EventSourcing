@@ -1,5 +1,5 @@
-﻿using KUB.Application.Interfaces;
-using KUB.Application.Commands;
+﻿using KUB.Core.Interfaces;
+using KUB.Core.Commands;
 using KUB.SharedKernel.CQRS.Interfaces;
 using KUB.SharedKernel.DTOModels.Tournament.Requests;
 using KUB.SharedKernel.Interfaces;
@@ -13,7 +13,7 @@ using KUB.SharedKernel;
 using KUB.SharedKernel.DTOModels.Tournament;
 using KUB.Core.Interfaces;
 
-namespace KUB.Application
+namespace KUB.Core
 {
     public class TournamentService : IService<TournamentDto, TournamentRegistrationPostRequest>
     {

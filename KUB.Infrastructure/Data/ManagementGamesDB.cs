@@ -32,12 +32,13 @@ namespace KUB.Infrastructure.Data
         public virtual DbSet<TournamentFormat> TournamentFormats { get; set; }
         public virtual DbSet<TournamentGridType> TournamentGridTypes { get; set; }
         public virtual DbSet<TournamentType> TournamentTypes { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-           {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-               optionsBuilder.UseSqlServer("HomeConnString");
+            {
+                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=kub;Trusted_Connection=True;");
             }
         }
 
@@ -194,19 +195,26 @@ namespace KUB.Infrastructure.Data
             };
             modelBuilder.Entity<Location>().HasData(location);
 
+            var tournaments = new List<Tournament>();
+
+            for(int i = 0; i < 1000; i++)
+            {
+                tournaments.Add(new Tournament
+                {
+                    Id = Guid.NewGuid(),
+                    Date = new DateTime(),
+                    EndTime = new TimeSpan(0, 0, 0, 0),
+                    LocationId = location.Id,
+                    StartTime = new TimeSpan(0, 0, 0, 0),
+                    TournamentFormatId = offline.FormatId,
+                    TournamentGridId = teams.GridId,
+                    TournamentName = "Турнир в Томске" + i,
+                    TournamentTypeId = practice.TypeId,
+                });
+            };
+
             modelBuilder.Entity<Tournament>().HasData(
-                    new Tournament
-                    {
-                        Id = Guid.NewGuid(),
-                        Date = new DateTime(),
-                        EndTime = new TimeSpan(0, 0, 0, 0),
-                        LocationId = location.Id,
-                        StartTime = new TimeSpan(0, 0, 0, 0),
-                        TournamentFormatId = offline.FormatId,
-                        TournamentGridId = teams.GridId,
-                        TournamentName = "Турнир в Томске",
-                        TournamentTypeId = practice.TypeId,
-                    }
+                    tournaments
                 );
 
             modelBuilder.Entity<Participant>().HasData(

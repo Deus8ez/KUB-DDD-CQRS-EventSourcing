@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KUB.Application.Interfaces
+namespace KUB.Core.Interfaces
 {
     public interface IService<TEntityDto, TPostDto>
     {

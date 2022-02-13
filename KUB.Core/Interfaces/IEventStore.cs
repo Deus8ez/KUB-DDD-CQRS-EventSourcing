@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace KUB.Application.Interfaces
+namespace KUB.Core.Interfaces
 {
     /// <summary>
     /// Stores model events for all models

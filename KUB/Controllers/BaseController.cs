@@ -1,4 +1,5 @@
-﻿using KUB.Application.Interfaces;
+﻿using AutoMapper;
+using KUB.Core.Interfaces;
 using KUB.SharedKernel.CQRS.Interfaces;
 using KUB.SharedKernel.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -11,14 +12,17 @@ namespace KUB.Web.Controllers
 {
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public abstract class BaseController<TEntityDto, TRequest> : ControllerBase
+    public abstract class BaseController<TEntity, TEntityDto, TRequest> : ControllerBase
+            where TEntity : class
             where TEntityDto : class
             where TRequest : class
     {
         private readonly IService<TEntityDto, TRequest> _service;
-        public BaseController(IService<TEntityDto, TRequest> service)
+        private readonly IMapper _mapper;
+        public BaseController(IService<TEntityDto, TRequest> service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -50,9 +54,11 @@ namespace KUB.Web.Controllers
         [HttpPost]
         public virtual async Task<IActionResult> Post(TRequest data)
         {
+
+            var entity = _mapper.Map<TRequest>(data);
             try
             {
-                await _service.PostAsync(data);
+                await _service.PostAsync(entity);
             } catch 
             {
                 return StatusCode(500);
@@ -64,9 +70,10 @@ namespace KUB.Web.Controllers
         [HttpPut]
         public virtual async Task<IActionResult> Update(TRequest data)
         {
+            var entity = _mapper.Map<TRequest>(data);
             try
             {
-                await _service.PutAsync(data);
+                await _service.PutAsync(entity);
             } catch
             {
                 return StatusCode(500);

@@ -1,9 +1,9 @@
-﻿using KUB.Application.Commands;
+﻿using KUB.Core.Commands;
 using KUB.Core.Models;
 using KUB.SharedKernel.Interfaces;
 using System.Threading.Tasks;
 
-namespace KUB.Application.Interfaces
+namespace KUB.Core.Interfaces
 {
     /// <summary>
     /// Used to decorate a command handler interface with commands

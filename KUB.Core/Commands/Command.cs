@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KUB.Application.Commands
+namespace KUB.Core.Commands
 {
     public interface ICommand
     {

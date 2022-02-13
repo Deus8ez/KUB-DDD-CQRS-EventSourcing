@@ -9,12 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KUB.Application\KUB.Application.csproj" />
+    <ProjectReference Include="..\KUB.Core\KUB.Core.csproj" />
+    <ProjectReference Include="..\KUB.Infrastructure\KUB.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
