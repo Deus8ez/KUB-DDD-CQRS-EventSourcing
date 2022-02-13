@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KUB.Core.Interfaces
 {
-    public interface IService<TEntityDto, TPostDto>
+    public interface IService<TEntityDto, TEntity>
     {
         /* ReadModel  */
         // Get all
@@ -21,9 +21,9 @@ namespace KUB.Core.Interfaces
 
         /* Commands */
         // Create Item
-        Task PostAsync(TPostDto item);
+        Task PostAsync(TEntity item);
         // Update Full Item
-        Task PutAsync(TPostDto item);
+        Task PutAsync(TEntity item);
         // Delete Item
         Task DeleteAsync(Guid id);
     }

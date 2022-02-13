@@ -26,6 +26,7 @@ namespace KUB.Infrastructure.Data.Repositories
         public async Task InsertAsync(Tournament obj)
         {
             await _context.Tournaments.AddAsync(obj);
+            await SaveAsync();
         }
 
         public async Task SaveAsync()

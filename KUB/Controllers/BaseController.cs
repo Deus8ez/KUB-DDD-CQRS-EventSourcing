@@ -17,9 +17,9 @@ namespace KUB.Web.Controllers
             where TEntityDto : class
             where TRequest : class
     {
-        private readonly IService<TEntityDto, TRequest> _service;
+        private readonly IService<TEntityDto, TEntity> _service;
         private readonly IMapper _mapper;
-        public BaseController(IService<TEntityDto, TRequest> service, IMapper mapper)
+        public BaseController(IService<TEntityDto, TEntity> service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
@@ -55,7 +55,7 @@ namespace KUB.Web.Controllers
         public virtual async Task<IActionResult> Post(TRequest data)
         {
 
-            var entity = _mapper.Map<TRequest>(data);
+            var entity = _mapper.Map<TEntity>(data);
             try
             {
                 await _service.PostAsync(entity);
@@ -70,7 +70,7 @@ namespace KUB.Web.Controllers
         [HttpPut]
         public virtual async Task<IActionResult> Update(TRequest data)
         {
-            var entity = _mapper.Map<TRequest>(data);
+            var entity = _mapper.Map<TEntity>(data);
             try
             {
                 await _service.PutAsync(entity);

@@ -30,7 +30,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IReadRepository<TournamentDto>, TournamentReadRepository>();
 builder.Services.AddScoped<IWriteRepository<Tournament>, TournamentWriteRepository>();
 builder.Services.AddScoped<IEventRepository<BaseEvent>, EventRepository>();
-builder.Services.AddScoped<IService<TournamentDto, TournamentRegistrationPostRequest>, TournamentService>();
+builder.Services.AddScoped<IService<TournamentDto, Tournament>, TournamentService>();
 
 builder.Services.AddScoped<ITournamentCommandHandler, TournamentCommandHandler>();
 

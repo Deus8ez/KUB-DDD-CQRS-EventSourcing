@@ -15,7 +15,7 @@ using KUB.Core.Interfaces;
 
 namespace KUB.Core
 {
-    public class TournamentService : IService<TournamentDto, TournamentRegistrationPostRequest>
+    public class TournamentService : IService<TournamentDto, Tournament>
     {
         private IReadRepository<TournamentDto> _readRepository;
         private IEventRepository<BaseEvent> _eventRepository;
@@ -58,7 +58,7 @@ namespace KUB.Core
             return result;
         }
 
-        public async Task PostAsync(TournamentRegistrationPostRequest item)
+        public async Task PostAsync(Tournament item)
         {
             await _commandHandler.Handle(new TournamentCreateCommand(item));
         }

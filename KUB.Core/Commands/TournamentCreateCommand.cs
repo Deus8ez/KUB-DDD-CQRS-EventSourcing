@@ -15,21 +15,12 @@ namespace KUB.Core.Commands
     {
         public Tournament TournamentAggregate { get; set; }
 
-        public TournamentCreateCommand(TournamentRegistrationPostRequest data)
+        public TournamentCreateCommand(Tournament data)
         {
+            TournamentAggregate = data;
+            TournamentAggregate.Id = Guid.NewGuid();
             Event = new BaseEvent();
             Event.SetEvent(TournamentAggregate.Id, "CreateTournament", TournamentAggregate);
-            TournamentAggregate = new Tournament
-            {
-                Date = data.Date,
-                EndTime = data.EndTime,
-                LocationId = data.LocationId,
-                StartTime = data.StartTime,
-                TournamentFormatId = data.TournamentFormatId,
-                TournamentGridId = data.TournamentGridId,
-                Id = Guid.NewGuid(),
-                TournamentTypeId = data.TournamentTypeId,
-            };
         }
     }
 }

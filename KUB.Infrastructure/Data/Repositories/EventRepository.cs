@@ -10,9 +10,15 @@ namespace KUB.Infrastructure.Data.Repositories
 {
     public class EventRepository : IEventRepository<BaseEvent>
     {
-        public Task AppendEventAsync(BaseEvent eventModel)
+        ManagementGamesDB _context;
+        public EventRepository(ManagementGamesDB context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task AppendEventAsync(BaseEvent eventModel)
+        {
+            await _context.Events.AddAsync(eventModel);
+            await _context.SaveChangesAsync();
         }
 
         public Task<IEnumerable<BaseEvent>> EventsAsync(Guid aggregateId)
