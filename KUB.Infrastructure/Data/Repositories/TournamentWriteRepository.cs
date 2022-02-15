@@ -26,19 +26,12 @@ namespace KUB.Infrastructure.Data.Repositories
         public async Task InsertAsync(Tournament obj)
         {
             await _context.Tournaments.AddAsync(obj);
-            await SaveAsync();
         }
 
-        public async Task SaveAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
-
-        public Task Update(Tournament obj)
+        public void Update(Tournament obj)
         {
             _context.Tournaments.Attach(obj);
             _context.Entry(obj).State = EntityState.Modified;
-            throw new NotImplementedException();
         }
     }
 }

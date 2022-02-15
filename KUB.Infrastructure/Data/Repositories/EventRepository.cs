@@ -18,7 +18,6 @@ namespace KUB.Infrastructure.Data.Repositories
         public async Task AppendEventAsync(BaseEvent eventModel)
         {
             await _context.Events.AddAsync(eventModel);
-            await _context.SaveChangesAsync();
         }
 
         public Task<IEnumerable<BaseEvent>> EventsAsync(Guid aggregateId)

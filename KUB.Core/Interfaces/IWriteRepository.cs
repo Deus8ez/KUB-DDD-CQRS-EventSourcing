@@ -9,8 +9,7 @@ namespace KUB.Core.Interfaces
     public interface IWriteRepository<T> where T : class
     {
         Task InsertAsync(T obj);
-        Task Update(T obj);
+        void Update(T obj);
         Task Delete(Guid id);
-        Task SaveAsync();
     }
 }
