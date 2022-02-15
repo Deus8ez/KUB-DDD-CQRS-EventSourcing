@@ -16,22 +16,17 @@ namespace KUB.Core
 {
     public class TournamentCommandHandler : ITournamentCommandHandler
     {
-        IWriteRepository<Tournament> _writeRepository;
-        IEventRepository<BaseEvent> _eventRepository;
-
-        public TournamentCommandHandler(
-                IWriteRepository<Tournament> writeRepository,
-                IEventRepository<BaseEvent> eventRepository
-            )
+        IUnitOfWork<Tournament, BaseEvent> _unitOfWork;
+        public TournamentCommandHandler(IUnitOfWork<Tournament, BaseEvent> unitOfWork)
         {
-            _eventRepository = eventRepository;
-            _writeRepository = writeRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task Handle(TournamentCreateCommand command)
         {
-            await _writeRepository.InsertAsync(command.TournamentAggregate);
-            await _eventRepository.AppendEventAsync(command.Event);
+            await _unitOfWork.WriteRepository().InsertAsync(command.TournamentAggregate);
+            await _unitOfWork.EventRepository().AppendEventAsync(command.Event);
+            await _unitOfWork.SaveAsync();
         }
     }
 }

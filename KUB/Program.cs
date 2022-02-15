@@ -5,6 +5,7 @@ using KUB.Core.Interfaces;
 using KUB.Core.Models;
 using KUB.Infrastructure.Data;
 using KUB.Infrastructure.Data.Repositories;
+using KUB.Infrastructure.Data.UnitsOfWork;
 using KUB.SharedKernel.DTOModels.Tournament;
 using KUB.SharedKernel.DTOModels.Tournament.Requests;
 using KUB.Web.Services;
@@ -31,9 +32,8 @@ builder.Services.AddScoped<IReadRepository<TournamentDto>, TournamentReadReposit
 builder.Services.AddScoped<IWriteRepository<Tournament>, TournamentWriteRepository>();
 builder.Services.AddScoped<IEventRepository<BaseEvent>, EventRepository>();
 builder.Services.AddScoped<IService<TournamentDto, Tournament>, TournamentService>();
-
+builder.Services.AddScoped<IUnitOfWork<Tournament, BaseEvent>, TournamentUnitOfWork>();
 builder.Services.AddScoped<ITournamentCommandHandler, TournamentCommandHandler>();
-
 builder.Services.AddSqlServer<ManagementGamesDB>(configuration.GetConnectionString("LocalDB"));
 builder.Services.AddSingleton(mapper);
 var app = builder.Build();
