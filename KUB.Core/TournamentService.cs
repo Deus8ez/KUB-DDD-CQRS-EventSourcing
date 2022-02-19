@@ -15,7 +15,7 @@ using KUB.Core.Interfaces;
 
 namespace KUB.Core
 {
-    public class TournamentService : IService<TournamentDto, Tournament>
+    public class TournamentService : ITournamentService<TournamentDto, Tournament>
     {
         private IReadRepository<TournamentDto> _readRepository;
         private IEventRepository<BaseEvent> _eventRepository;
@@ -30,11 +30,6 @@ namespace KUB.Core
             _commandHandler = commandHandler;
             _readRepository = readRepository;
             _eventRepository = eventRepository;
-        }
-
-        public Task DeleteAsync(Guid id)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<TournamentDto>> GetAllAsync()
@@ -63,24 +58,24 @@ namespace KUB.Core
             await _commandHandler.Handle(new TournamentCreateCommand(item));
         }
 
-        public Task PostAsync(TournamentDto item)
+        public async Task PutAsync(Tournament item)
         {
-            throw new NotImplementedException();
+            await _commandHandler.Handle(new TournamentUpdateCommand(item));
         }
 
-        public Task PutAsync(TournamentRegistrationPostRequest item)
+        public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            await _commandHandler.Handle(new TournamentDeleteCommand(id));
         }
 
-        public Task PutAsync(Tournament item)
+        public async Task AddParticipant(ParticipantInTournament participantInTournament)
         {
-            throw new NotImplementedException();
+            await _commandHandler.Handle(new TournamentAddParticipantCommand(participantInTournament));
         }
 
-        public Task PutAsync(TournamentDto item)
+        public async Task RemoveParticipant(ParticipantInTournament participantInTournament)
         {
-            throw new NotImplementedException();
+            await _commandHandler.Handle(new TournamentRemoveParticipantCommand(participantInTournament));
         }
     }
 }

@@ -8,7 +8,6 @@ namespace KUB.Core.Models
 {
     public class Participant : BaseEntity, IAggregateRoot
     {
-        public Guid ParticipantId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronym { get; set; }

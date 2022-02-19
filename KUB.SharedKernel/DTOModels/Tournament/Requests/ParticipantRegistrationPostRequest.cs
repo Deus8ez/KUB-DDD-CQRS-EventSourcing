@@ -8,8 +8,8 @@ namespace KUB.SharedKernel.DTOModels.Tournament.Requests
 {
     public class ParticipantRegistrationPostRequest
     {
-        public int ParticipantId { get; set; }
-        public int? RoleId { get; set; }
-        public Guid Id { get; set; }
+        public Guid ParticipantId { get; set; }
+        public Guid? RoleId { get; set; }
+        public Guid TournamentId { get; set; }
     }
 }

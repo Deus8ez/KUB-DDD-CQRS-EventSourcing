@@ -12,6 +12,9 @@ namespace KUB.Web.Services
             // Add as many of these lines as you need to map your objects
             CreateMap<TournamentRegistrationPostRequest, Tournament>();
             CreateMap<Tournament, TournamentDto>();
+            CreateMap<ParticipantRegistrationPostRequest, ParticipantInTournament>();
+            CreateMap<TournamentDto, Tournament>();
+
         }
     }
 }

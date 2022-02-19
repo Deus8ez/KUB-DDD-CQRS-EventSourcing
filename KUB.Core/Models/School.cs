@@ -7,7 +7,7 @@ namespace KUB.Core.Models
 {
     public class School
     {
-        public Guid SchoolId { get; set; }
+        public Guid Id { get; set; }
         public string SchoolName { get; set; }
         public virtual ICollection<ParticipantInSchool> ParticipantInSchools { get; set; }
     }

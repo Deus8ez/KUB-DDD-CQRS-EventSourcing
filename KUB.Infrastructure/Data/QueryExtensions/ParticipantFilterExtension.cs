@@ -14,7 +14,6 @@ namespace KUB.Infrastructure.Data.QueryExtensions
         {
             return query.Select(e => new ParticipantGetResponse 
             { 
-                ParticipantId = e.ParticipantId,
                 BlitzGameRank = e.BlitzGameRank,
                 CanBeAJury = e.CanBeAJury,
                 ClassicGameRank = e.ClassicGameRank,

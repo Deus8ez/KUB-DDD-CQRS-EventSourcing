@@ -43,9 +43,9 @@ namespace KUB.Infrastructure.Data.Repositories
                     "TournamentTypes.Type, " +
                     "Locations.City " +
                     "from Tournaments " +
-                    "inner join TournamentFormats on Tournaments.TournamentFormatId = TournamentFormats.FormatId " +
-                    "inner join TournamentGridTypes on Tournaments.TournamentGridId = TournamentGridTypes.GridId " +
-                    "inner join TournamentTypes on Tournaments.TournamentTypeId = TournamentTypes.TypeId " +
+                    "inner join TournamentFormats on Tournaments.TournamentFormatId = TournamentFormats.Id " +
+                    "inner join TournamentGridTypes on Tournaments.TournamentGridId = TournamentGridTypes.Id " +
+                    "inner join TournamentTypes on Tournaments.TournamentTypeId = TournamentTypes.Id " +
                     "inner join Locations on Tournaments.LocationId = Locations.Id ", 
                   connection);
                 connection.Open();
@@ -102,9 +102,9 @@ namespace KUB.Infrastructure.Data.Repositories
                     "TournamentTypes.Type, " +
                     "Locations.City " +
                     "from Tournaments " +
-                    "inner join TournamentFormats on Tournaments.TournamentFormatId = TournamentFormats.FormatId " +
-                    "inner join TournamentGridTypes on Tournaments.TournamentGridId = TournamentGridTypes.GridId " +
-                    "inner join TournamentTypes on Tournaments.TournamentTypeId = TournamentTypes.TypeId " +
+                    "inner join TournamentFormats on Tournaments.TournamentFormatId = TournamentFormats.Id " +
+                    "inner join TournamentGridTypes on Tournaments.TournamentGridId = TournamentGridTypes.Id " +
+                    "inner join TournamentTypes on Tournaments.TournamentTypeId = TournamentTypes.Id " +
                     "inner join Locations on Tournaments.LocationId = Locations.Id " +
                     "where Tournaments.Id = @ID",
                   connection);

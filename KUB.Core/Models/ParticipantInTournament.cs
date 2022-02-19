@@ -6,14 +6,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KUB.Core.Models
 {
-    public partial class ParticipantInTournament
+    public partial class ParticipantInTournament : BaseEntity
     {
-        public Guid TournamentWithParticipantId { get; set; }
-        public Guid ParticipantInId { get; set; }
-        public Guid? ParticipantRoleId { get; set; }
-        public virtual Participant ParticipantInTournamentNavigation { get; set; }
-        public virtual Role ParticipantRole { get; set; }
-        public virtual Tournament TournamentWithParticipant { get; set; }
+        public Guid TournamentId { get; set; }
+        public Guid ParticipantId { get; set; }
+        public Guid? RoleId { get; set; }
+        public virtual Participant Participant { get; set; }
+        public virtual Role Role { get; set; }
+        public virtual Tournament Tournament { get; set; }
         public bool SetParticipantInTournament(Participant participant, Role role, Tournament tournament)
         {
             if(participant.CanBeAJury == false && role.RoleName == "Судья")
@@ -21,9 +21,9 @@ namespace KUB.Core.Models
                 return false;
             }
 
-            ParticipantRole = role;
-            ParticipantInTournamentNavigation = participant;
-            TournamentWithParticipant = tournament;
+            Role = role;
+            Participant = participant;
+            Tournament = tournament;
         
             return true;
         }

@@ -11,10 +11,16 @@ namespace KUB.Infrastructure.Data.Repositories
 {
     public class TournamentWriteRepository : IWriteRepository<Tournament>
     {
-        ManagementGamesDB _context;
+        public ManagementGamesDB _context;
         public TournamentWriteRepository(ManagementGamesDB context)
         {
             _context = context;
+        }
+
+        public async Task<Tournament> GetEntityByIdAsync(Guid id)
+        {
+            var item = await _context.Tournaments.FindAsync(id);
+            return item;
         }
 
         public async Task Delete(Guid id)

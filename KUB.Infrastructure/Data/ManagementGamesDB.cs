@@ -47,7 +47,7 @@ namespace KUB.Infrastructure.Data
 
             var offline = new TournamentFormat
             {
-                FormatId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 Format = "Оффлайн"
             };
 
@@ -55,41 +55,41 @@ namespace KUB.Infrastructure.Data
                     offline,
                     new TournamentFormat
                     {
-                        FormatId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Format = "Онлайн"
                     },
                     new TournamentFormat
                     {
-                        FormatId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Format = "Гибридный"
                     }
             );
 
             var practice = new TournamentType
             {
-                TypeId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 Type = "Практикум"
             };
             modelBuilder.Entity<TournamentType>().HasData(
                     practice,
                     new TournamentType
                     {
-                        TypeId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Type = "Товарищеский"
                     },
                     new TournamentType
                     {
-                        TypeId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Type = "Именной"
                     },
                     new TournamentType
                     {
-                        TypeId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Type = "Отборочный"
                     },
                     new TournamentType
                     {
-                        TypeId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Type = "Финал года"
                     }
             );
@@ -97,42 +97,42 @@ namespace KUB.Infrastructure.Data
             modelBuilder.Entity<Role>().HasData(
                     new Role
                     {
-                        RoleId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         RoleName = "Не выбрана"
                     },
                     new Role
                     {
-                        RoleId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         RoleName = "Зритель"
                     },
                     new Role
                     {
-                        RoleId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         RoleName = "Игрок"
                     },
                     new Role
                     {
-                        RoleId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         RoleName = "Секундант"
                     },
                     new Role
                     {
-                        RoleId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         RoleName = "Судья"
                     },
                     new Role
                     {
-                        RoleId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         RoleName = "Арбитр"
                     },
                     new Role
                     {
-                        RoleId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         RoleName = "Секретарь"
                     },
                     new Role
                     {
-                        RoleId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         RoleName = "Тренер"
                     }
             );
@@ -140,41 +140,41 @@ namespace KUB.Infrastructure.Data
             modelBuilder.Entity<JuryPanel>().HasData(
                     new JuryPanel
                     {
-                        PanelId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Panel = "Нанимающиеся на работу"
                     },
                     new JuryPanel
                     {
-                        PanelId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Panel = "Направляющие на переговоры"
                     },
                     new JuryPanel
                     {
-                        PanelId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Panel = "Направляющие на переговоры"
                     }
             );
 
             var teams = new TournamentGridType
             {
-                GridId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 Type = "По командам"
             };
             modelBuilder.Entity<TournamentGridType>().HasData(
                     new TournamentGridType
                     {
-                        GridId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Type = "Каждый с каждым"
                     },
                     new TournamentGridType
                     {
-                        GridId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Type = "Навылет"
                     },
                     teams,
                     new TournamentGridType
                     {
-                        GridId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Type = "Комбинированный"
                     }
             );
@@ -182,7 +182,7 @@ namespace KUB.Infrastructure.Data
             modelBuilder.Entity<School>().HasData(
                     new School
                     {
-                        SchoolId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         SchoolName = "Нет школы"
                     }
                 );
@@ -197,7 +197,7 @@ namespace KUB.Infrastructure.Data
 
             var tournaments = new List<Tournament>();
 
-            for(int i = 0; i < 1000; i++)
+            for(int i = 0; i < 100; i++)
             {
                 tournaments.Add(new Tournament
                 {
@@ -206,10 +206,10 @@ namespace KUB.Infrastructure.Data
                     EndTime = new TimeSpan(0, 0, 0, 0),
                     LocationId = location.Id,
                     StartTime = new TimeSpan(0, 0, 0, 0),
-                    TournamentFormatId = offline.FormatId,
-                    TournamentGridId = teams.GridId,
+                    TournamentFormatId = offline.Id,
+                    TournamentGridId = teams.Id,
                     TournamentName = "Турнир в Томске" + i,
-                    TournamentTypeId = practice.TypeId,
+                    TournamentTypeId = practice.Id,
                 });
             };
 
@@ -228,118 +228,117 @@ namespace KUB.Infrastructure.Data
                         Name = "Иван",
                         Patronym = "Иванович",
                         Surname = "Иванов",
-                        ParticipantId = Guid.NewGuid(),
                     }
                 );
 
-            modelBuilder.Entity<JuryInPanel>(entity =>
-            {
-                entity.HasOne(d => d.JuryPanel)
-                    .WithMany(p => p.JuryInPanels)
-                    .HasForeignKey(d => d.JuryPanelId)
-                    .HasConstraintName("FK_Судьи в коллегиях_Коллегии судей");
+            //modelBuilder.Entity<JuryInPanel>(entity =>
+            //{
+            //    entity.HasOne(d => d.JuryPanel)
+            //        .WithMany(p => p.JuryInPanels)
+            //        .HasForeignKey(d => d.JuryPanelId)
+            //        .HasConstraintName("FK_Судьи в коллегиях_Коллегии судей");
 
-                entity.HasOne(d => d.JuryParticipant)
-                    .WithMany(p => p.JuryInPanels)
-                    .HasForeignKey(d => d.JuryParticipantId)
-                    .HasConstraintName("FK_Судьи в коллегиях_Участники1");
+            //    entity.HasOne(d => d.JuryParticipant)
+            //        .WithMany(p => p.JuryInPanels)
+            //        .HasForeignKey(d => d.JuryParticipantId)
+            //        .HasConstraintName("FK_Судьи в коллегиях_Участники1");
 
-                entity.HasOne(d => d.TournamentWithJury)
-                    .WithMany(p => p.JuryInPanels)
-                    .HasForeignKey(d => d.TournamentWithJuryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Судьи в коллегиях_Турниры");
-            });
+            //    entity.HasOne(d => d.TournamentWithJury)
+            //        .WithMany(p => p.JuryInPanels)
+            //        .HasForeignKey(d => d.TournamentWithJuryId)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("FK_Судьи в коллегиях_Турниры");
+            //});
 
-            modelBuilder.Entity<JuryPanel>(entity =>
-            {
-                entity.HasKey(e => e.PanelId)
-                    .HasName("PK_Коллегии судей");
-            });
+            //modelBuilder.Entity<JuryPanel>(entity =>
+            //{
+            //    entity.HasKey(e => e.PanelId)
+            //        .HasName("PK_Коллегии судей");
+            //});
 
-            modelBuilder.Entity<ParticipantInSchool>(entity =>
-            {
-                entity.HasOne(d => d.ParticipantInSchoolNavigation)
-                    .WithOne(p => p.ParticipantInSchool)
-                    .HasForeignKey<ParticipantInSchool>(d => d.ParticipantInSchoolId)
-                    .HasConstraintName("FK_Участники в школах_Участники");
+            //modelBuilder.Entity<ParticipantInSchool>(entity =>
+            //{
+            //    entity.HasOne(d => d.ParticipantInSchoolNavigation)
+            //        .WithOne(p => p.ParticipantInSchool)
+            //        .HasForeignKey<ParticipantInSchool>(d => d.ParticipantInSchoolId)
+            //        .HasConstraintName("FK_Участники в школах_Участники");
 
-                entity.HasOne(d => d.ParticipantSchool)
-                    .WithMany(p => p.ParticipantInSchools)
-                    .HasForeignKey(d => d.ParticipantSchoolId)
-                    .HasConstraintName("FK_Участники в школах_Школы");
-            });
+            //    entity.HasOne(d => d.ParticipantSchool)
+            //        .WithMany(p => p.ParticipantInSchools)
+            //        .HasForeignKey(d => d.ParticipantSchoolId)
+            //        .HasConstraintName("FK_Участники в школах_Школы");
+            //});
 
-            modelBuilder.Entity<ParticipantInTournament>(entity =>
-            {
-                entity.HasKey(e => new { e.TournamentWithParticipantId, e.ParticipantInId })
-                    .HasName("PK_Участники в турнирах");
+            //modelBuilder.Entity<ParticipantInTournament>(entity =>
+            //{
+            //    entity.HasKey(e => new { e.TournamentId, e.ParticipantId })
+            //        .HasName("PK_Участники в турнирах");
 
-                entity.HasOne(d => d.ParticipantInTournamentNavigation)
-                    .WithMany(p => p.ParticipantInTournaments)
-                    .HasForeignKey(d => d.ParticipantInId)
-                    .HasConstraintName("FK_Участники в турнирах_Участники");
+            //    entity.HasOne(d => d.Participant)
+            //        .WithMany(p => p.ParticipantInTournaments)
+            //        .HasForeignKey(d => d.ParticipantId)
+            //        .HasConstraintName("FK_Участники в турнирах_Участники");
 
-                entity.HasOne(d => d.ParticipantRole)
-                    .WithMany(p => p.ParticipantInTournaments)
-                    .HasForeignKey(d => d.ParticipantRoleId)
-                    .HasConstraintName("FK_Участники в турнирах_Роли");
+            //    entity.HasOne(d => d.Role)
+            //        .WithMany(p => p.ParticipantInTournaments)
+            //        .HasForeignKey(d => d.ParticipantId)
+            //        .HasConstraintName("FK_Участники в турнирах_Роли");
 
-                entity.HasOne(d => d.TournamentWithParticipant)
-                    .WithMany(p => p.ParticipantInTournaments)
-                    .HasForeignKey(d => d.TournamentWithParticipantId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Участники в турнирах_Турниры");
-            });
+            //    entity.HasOne(d => d.Tournament)
+            //        .WithMany(p => p.ParticipantInTournaments)
+            //        .HasForeignKey(d => d.Tournament)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("FK_Участники в турнирах_Турниры");
+            //});
 
-            modelBuilder.Entity<Tournament>(entity =>
-            {
-                entity.Property(e => e.EndTime).IsFixedLength(true);
+            //modelBuilder.Entity<Tournament>(entity =>
+            //{
+            //    entity.Property(e => e.EndTime).IsFixedLength(true);
 
-                entity.Property(e => e.StartTime).IsFixedLength(true);
+            //    entity.Property(e => e.StartTime).IsFixedLength(true);
 
-                entity.HasOne(d => d.TournamentFormat)
-                    .WithMany(p => p.Tournaments)
-                    .HasForeignKey(d => d.TournamentFormatId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Турниры_Формат проведения");
+            //    entity.HasOne(d => d.TournamentFormat)
+            //        .WithMany(p => p.Tournaments)
+            //        .HasForeignKey(d => d.TournamentFormatId)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("FK_Турниры_Формат проведения");
 
-                entity.HasOne(d => d.TournamentGrid)
-                    .WithMany(p => p.Tournaments)
-                    .HasForeignKey(d => d.TournamentGridId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Турниры_Вариант сетки турнира");
+            //    entity.HasOne(d => d.TournamentGrid)
+            //        .WithMany(p => p.Tournaments)
+            //        .HasForeignKey(d => d.TournamentGridId)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("FK_Турниры_Вариант сетки турнира");
 
-                entity.HasOne(d => d.Location)
-                    .WithMany(p => p.Tournaments)
-                    .HasForeignKey(d => d.LocationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Турниры_Место1");
+            //    entity.HasOne(d => d.Location)
+            //        .WithMany(p => p.Tournaments)
+            //        .HasForeignKey(d => d.LocationId)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("FK_Турниры_Место1");
 
-                entity.HasOne(d => d.TournamentType)
-                    .WithMany(p => p.Tournaments)
-                    .HasForeignKey(d => d.TournamentTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Турниры_Типы турниров");
-            });
+            //    entity.HasOne(d => d.TournamentType)
+            //        .WithMany(p => p.Tournaments)
+            //        .HasForeignKey(d => d.TournamentTypeId)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("FK_Турниры_Типы турниров");
+            //});
 
-            modelBuilder.Entity<TournamentFormat>(entity =>
-            {
-                entity.HasKey(e => e.FormatId)
-                    .HasName("PK_Формат проведения");
-            });
+            //modelBuilder.Entity<TournamentFormat>(entity =>
+            //{
+            //    entity.HasKey(e => e.FormatId)
+            //        .HasName("PK_Формат проведения");
+            //});
 
-            modelBuilder.Entity<TournamentGridType>(entity =>
-            {
-                entity.HasKey(e => e.GridId)
-                    .HasName("PK_Вариант сетки турнира");
-            });
+            //modelBuilder.Entity<TournamentGridType>(entity =>
+            //{
+            //    entity.HasKey(e => e.GridId)
+            //        .HasName("PK_Вариант сетки турнира");
+            //});
 
-            modelBuilder.Entity<TournamentType>(entity =>
-            {
-                entity.HasKey(e => e.TypeId)
-                    .HasName("PK_Типы турниров");
-            });
+            //modelBuilder.Entity<TournamentType>(entity =>
+            //{
+            //    entity.HasKey(e => e.TypeId)
+            //        .HasName("PK_Типы турниров");
+            //});
 
             //OnModelCreatingPartial(modelBuilder);
         }

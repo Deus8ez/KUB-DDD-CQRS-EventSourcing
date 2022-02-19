@@ -13,9 +13,13 @@ namespace KUB.Core.Interfaces
         Task Handle(ICommand command);
     }
 
-    public interface ITournamentCommandHandler : ICommandHandler<TournamentCreateCommand>
+    public interface ITournamentCommandHandler : 
+        ICommandHandler<TournamentCreateCommand>,
+        ICommandHandler<TournamentUpdateCommand>,
+        ICommandHandler<TournamentDeleteCommand>,
+        ICommandHandler<TournamentAddParticipantCommand>,
+        ICommandHandler<TournamentRemoveParticipantCommand>
     {
-
     }
 
     public interface IBaseTournamentHandler 

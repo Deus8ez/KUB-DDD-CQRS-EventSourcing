@@ -26,11 +26,11 @@ namespace KUB.Core.Models
 
         public void AddParticipant(ParticipantInTournament participantInTournament)
         {
-            if(participantInTournament.ParticipantRole == null)
+            if(participantInTournament.Role == null)
             {
-                participantInTournament.ParticipantRole = new Role
+                participantInTournament.Role = new Role
                 {
-                    RoleId = Guid.NewGuid(),
+                    Id = Guid.NewGuid(),
                     RoleName = "Зритель"
                 };
             }

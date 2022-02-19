@@ -7,7 +7,7 @@ namespace KUB.Core.Models
 {
     public partial class Role
     {
-        public Guid RoleId { get; set; }
+        public Guid Id { get; set; }
         public string RoleName { get; set; }
         public virtual ICollection<ParticipantInTournament> ParticipantInTournaments { get; set; }
     }

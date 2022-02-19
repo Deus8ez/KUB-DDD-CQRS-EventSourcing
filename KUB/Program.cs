@@ -31,7 +31,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IReadRepository<TournamentDto>, TournamentReadRepository>();
 builder.Services.AddScoped<IWriteRepository<Tournament>, TournamentWriteRepository>();
 builder.Services.AddScoped<IEventRepository<BaseEvent>, EventRepository>();
-builder.Services.AddScoped<IService<TournamentDto, Tournament>, TournamentService>();
+builder.Services.AddScoped<ITournamentService<TournamentDto, Tournament>, TournamentService>();
 builder.Services.AddScoped<IUnitOfWork<Tournament, BaseEvent>, TournamentUnitOfWork>();
 builder.Services.AddScoped<ITournamentCommandHandler, TournamentCommandHandler>();
 builder.Services.AddSqlServer<ManagementGamesDB>(configuration.GetConnectionString("LocalDB"));

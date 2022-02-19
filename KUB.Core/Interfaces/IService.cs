@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KUB.Core.Interfaces
 {
-    public interface IService<TEntityDto, TEntity>
+    public interface IService<TEntityDto, TEntity> 
     {
         /* ReadModel  */
         // Get all
@@ -26,5 +26,10 @@ namespace KUB.Core.Interfaces
         Task PutAsync(TEntity item);
         // Delete Item
         Task DeleteAsync(Guid id);
+    }
+    public interface ITournamentService<TEntityDto, TEntity> : IService<TEntityDto, TEntity>
+    {
+        Task AddParticipant(ParticipantInTournament participantInTournament);
+        Task RemoveParticipant(ParticipantInTournament participantInTournament);
     }
 }

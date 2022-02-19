@@ -8,6 +8,7 @@ namespace KUB.Core.Interfaces
 {
     public interface IWriteRepository<T> where T : class
     {
+        Task<T> GetEntityByIdAsync(Guid id);
         Task InsertAsync(T obj);
         void Update(T obj);
         Task Delete(Guid id);

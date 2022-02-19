@@ -7,7 +7,7 @@ namespace KUB.Core.Models
 {
     public class TournamentFormat
     {
-        public Guid FormatId { get; set; }
+        public Guid Id { get; set; }
         public string Format { get; set; }
         public virtual ICollection<Tournament> Tournaments { get; set; }
     }
