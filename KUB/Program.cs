@@ -30,6 +30,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IReadRepository<TournamentDto>, TournamentReadRepository>();
 builder.Services.AddScoped<IWriteRepository<Tournament>, TournamentWriteRepository>();
+builder.Services.AddScoped<IBaseWriteRepository, BaseWriteRepository>();
 builder.Services.AddScoped<IEventRepository<BaseEvent>, EventRepository>();
 builder.Services.AddScoped<ITournamentService<TournamentDto, Tournament>, TournamentService>();
 builder.Services.AddScoped<IUnitOfWork<Tournament, BaseEvent>, TournamentUnitOfWork>();

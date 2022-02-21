@@ -47,7 +47,7 @@ namespace KUB.Web.Controllers
 
         [HttpDelete]
         [Route("removeParticipant")]
-        public async Task<IActionResult> RemoveParticipant(ParticipantRegistrationPostRequest participantRegistrationPostRequest)
+        public async Task<IActionResult> RemoveParticipant(ParticipantInTournamentDeletionRequest participantRegistrationPostRequest)
         {
             var participantInTournament = _mapper.Map<ParticipantInTournament>(participantRegistrationPostRequest);
 

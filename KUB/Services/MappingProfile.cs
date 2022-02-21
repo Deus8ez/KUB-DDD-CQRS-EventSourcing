@@ -13,6 +13,8 @@ namespace KUB.Web.Services
             CreateMap<TournamentRegistrationPostRequest, Tournament>();
             CreateMap<Tournament, TournamentDto>();
             CreateMap<ParticipantRegistrationPostRequest, ParticipantInTournament>();
+            CreateMap<ParticipantInTournamentDeletionRequest, ParticipantInTournament>();
+
             CreateMap<TournamentDto, Tournament>();
 
         }

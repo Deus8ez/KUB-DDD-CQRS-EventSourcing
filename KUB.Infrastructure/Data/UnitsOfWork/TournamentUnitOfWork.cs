@@ -14,11 +14,13 @@ namespace KUB.Infrastructure.Data.UnitsOfWork
         protected ManagementGamesDB _context;
         IWriteRepository<Tournament> _writeRepository;
         IEventRepository<BaseEvent> _eventRepository;
+        IBaseWriteRepository _baseWriteRepository;
         public TournamentUnitOfWork(ManagementGamesDB context)
         {
             _context = context;
             _writeRepository = new TournamentWriteRepository(_context);
             _eventRepository = new EventRepository(_context);
+            _baseWriteRepository = new BaseWriteRepository(_context);
         }
 
         public IWriteRepository<Tournament> WriteRepository()
@@ -30,7 +32,10 @@ namespace KUB.Infrastructure.Data.UnitsOfWork
         {
             return _eventRepository;
         }
-
+        public IBaseWriteRepository BaseWriteRepository()
+        {
+            return _baseWriteRepository;
+        }
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
@@ -54,5 +59,7 @@ namespace KUB.Infrastructure.Data.UnitsOfWork
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+
     }
 }

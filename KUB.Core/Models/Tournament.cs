@@ -22,26 +22,26 @@ namespace KUB.Core.Models
         public Guid LocationId { get; set; }
         public virtual Location Location { get; set; }
         public virtual ICollection<JuryInPanel> JuryInPanels { get; set; }
-        public virtual ICollection<ParticipantInTournament> ParticipantInTournaments { get; set; } = new Collection<ParticipantInTournament>();
+        public virtual ICollection<ParticipantInTournament> ParticipantInTournaments { get; set; }
 
         public void AddParticipant(ParticipantInTournament participantInTournament)
         {
-            if(participantInTournament.Role == null)
-            {
-                participantInTournament.Role = new Role
-                {
-                    Id = Guid.NewGuid(),
-                    RoleName = "Зритель"
-                };
-            }
-
+            ParticipantInTournaments = new Collection<ParticipantInTournament>();
             ParticipantInTournaments.Add(participantInTournament);
         }
 
         public void RemoveParticipant(ParticipantInTournament participantInTournament)
         {
+            foreach(var participant in ParticipantInTournaments)
+            {
+                if(participant.ParticipantId == participantInTournament.ParticipantId)
+                {
+                    ParticipantInTournaments.Remove(participant);
+                    break;
+                }
+            }
 
-            ParticipantInTournaments.Remove(participantInTournament);
+            Console.WriteLine(ParticipantInTournaments.Count);
         }
     }
 }

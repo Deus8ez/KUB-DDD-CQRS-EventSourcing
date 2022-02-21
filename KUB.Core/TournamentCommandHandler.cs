@@ -17,12 +17,12 @@ namespace KUB.Core
     public class TournamentCommandHandler : ITournamentCommandHandler
     {
         IUnitOfWork<Tournament, BaseEvent> _unitOfWork;
-        private IWriteRepository<Tournament> _writeRepository;
+        private IBaseWriteRepository _writeRepository;
         private IEventRepository<BaseEvent> _eventRepository;
         public TournamentCommandHandler(IUnitOfWork<Tournament, BaseEvent> unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _writeRepository = unitOfWork.WriteRepository();
+            _writeRepository = unitOfWork.BaseWriteRepository();
             _eventRepository = unitOfWork.EventRepository();
 
         }
@@ -43,24 +43,24 @@ namespace KUB.Core
 
         public async Task Handle(TournamentDeleteCommand command)
         {
-            await _writeRepository.Delete(command.TournamentId);
+            await _writeRepository.Delete<Tournament>(command.TournamentId);
             await _eventRepository.AppendEventAsync(command.Event);
             await _unitOfWork.SaveAsync();
         }
 
         public async Task Handle(TournamentAddParticipantCommand command)
         {
-            var tournament = await _writeRepository.GetEntityByIdAsync(command.ParticipantInTournament.TournamentId);
-            var role = await _writeRepository.
+            var participantInTournament = command.ParticipantInTournament;
+            var tournament = await _writeRepository.GetEntityByIdAsync<Tournament>(command.ParticipantInTournament.TournamentId);
             tournament.AddParticipant(command.ParticipantInTournament);
-            _writeRepository.Update(tournament);
             await _eventRepository.AppendEventAsync(command.Event);
             await _unitOfWork.SaveAsync();
         }
 
         public async Task Handle(TournamentRemoveParticipantCommand command)
         {
-            var tournament = await _writeRepository.GetEntityByIdAsync(command.ParticipantInTournament.TournamentId);
+            var participantInTournament = command.ParticipantInTournament;
+            var tournament = await _writeRepository.GetTournamentWithParticipants(participantInTournament.TournamentId);
             tournament.RemoveParticipant(command.ParticipantInTournament);
             await _eventRepository.AppendEventAsync(command.Event);
             await _unitOfWork.SaveAsync();

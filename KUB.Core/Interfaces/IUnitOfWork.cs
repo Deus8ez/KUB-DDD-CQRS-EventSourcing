@@ -12,6 +12,7 @@ namespace KUB.Core.Interfaces
     where T2 : BaseEvent, new()
     {
         public IWriteRepository<T1> WriteRepository();
+        public IBaseWriteRepository BaseWriteRepository();
         public IEventRepository<T2> EventRepository();
         Task SaveAsync();
     }
