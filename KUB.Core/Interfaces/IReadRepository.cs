@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace KUB.Core.Interfaces
 {
-    public interface IReadRepository<T> where T : class
+    public interface IReadRepository
     {
-        Task<T> GetByIdAsync(Guid id);
-        Task<List<T>> GetAllAsync();
+        Task<T> GetByIdAsync<T>(Guid id) where T : class;
+        Task<List<T>> GetAllAsync<T>() where T : class;
     }
 }

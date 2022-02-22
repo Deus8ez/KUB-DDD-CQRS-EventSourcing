@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace KUB.Core.Commands
 {
-    public class TournamentDeleteCommand : Command, ICommand
+    public class DeleteCommand : Command, ICommand
     {
-        public Guid TournamentId { get; set; }
+        public Guid AggregateId { get; set; }
 
-        public TournamentDeleteCommand(Guid TournamentId)
+        public DeleteCommand(Guid AggregateId, string commandName)
         {
             Event = new BaseEvent();
-            Event.SetEvent(TournamentId, "DeleteTournament", TournamentId);
+            Event.SetEvent(AggregateId, commandName, AggregateId);
         }
     }
 }

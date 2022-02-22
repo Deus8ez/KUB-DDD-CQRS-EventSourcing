@@ -11,16 +11,14 @@ using System.Threading.Tasks;
 
 namespace KUB.Core.Commands
 {
-    public class TournamentCreateCommand : Command, ICommand
+    public class CreateCommand : Command, ICommand
     {
-        public Tournament TournamentAggregate { get; set; }
-
-        public TournamentCreateCommand(Tournament data)
+        public CreateCommand(BaseEntity data, string commandName)
         {
-            TournamentAggregate = data;
-            TournamentAggregate.Id = Guid.NewGuid();
+            Aggregate = data;
+            Aggregate.Id = Guid.NewGuid();
             Event = new BaseEvent();
-            Event.SetEvent(TournamentAggregate.Id, "CreateTournament", TournamentAggregate);
+            Event.SetEvent(Aggregate.Id, commandName, Aggregate);
         }
     }
 }

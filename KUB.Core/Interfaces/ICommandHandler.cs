@@ -14,13 +14,22 @@ namespace KUB.Core.Interfaces
     }
 
     public interface ITournamentCommandHandler : 
-        ICommandHandler<TournamentCreateCommand>,
-        ICommandHandler<TournamentUpdateCommand>,
-        ICommandHandler<TournamentDeleteCommand>,
-        ICommandHandler<TournamentAddParticipantCommand>,
-        ICommandHandler<TournamentRemoveParticipantCommand>
+        ICommandHandler<CreateCommand>,
+        ICommandHandler<UpdateCommand>,
+        ICommandHandler<DeleteCommand>,
+        ICommandHandler<AddParticipantCommand>,
+        ICommandHandler<RemoveParticipantCommand>
     {
     }
+
+    //public interface ITournamentCommandHandler :
+    //ICommandHandler<TournamentCreateCommand>,
+    //ICommandHandler<TournamentUpdateCommand>,
+    //ICommandHandler<TournamentDeleteCommand>,
+    //ICommandHandler<TournamentAddParticipantCommand>,
+    //ICommandHandler<TournamentRemoveParticipantCommand>
+    //{
+    //}
 
     public interface IBaseTournamentHandler 
     {

@@ -27,28 +27,28 @@ namespace KUB.Core
 
         }
 
-        public async Task Handle(TournamentCreateCommand command)
+        public async Task Handle(CreateCommand command)
         {
-            await _writeRepository.InsertAsync(command.TournamentAggregate);
+            await _writeRepository.InsertAsync(command.Aggregate);
             await _eventRepository.AppendEventAsync(command.Event);
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task Handle(TournamentUpdateCommand command)
+        public async Task Handle(UpdateCommand command)
         {
-            _writeRepository.Update(command.TournamentAggregate);
+            _writeRepository.Update(command.Aggregate);
             await _eventRepository.AppendEventAsync(command.Event);
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task Handle(TournamentDeleteCommand command)
+        public async Task Handle(DeleteCommand command)
         {
-            await _writeRepository.Delete<Tournament>(command.TournamentId);
+            await _writeRepository.Delete<Tournament>(command.AggregateId);
             await _eventRepository.AppendEventAsync(command.Event);
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task Handle(TournamentAddParticipantCommand command)
+        public async Task Handle(AddParticipantCommand command)
         {
             var participantInTournament = command.ParticipantInTournament;
             var tournament = await _writeRepository.GetEntityByIdAsync<Tournament>(command.ParticipantInTournament.TournamentId);
@@ -57,7 +57,7 @@ namespace KUB.Core
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task Handle(TournamentRemoveParticipantCommand command)
+        public async Task Handle(RemoveParticipantCommand command)
         {
             var participantInTournament = command.ParticipantInTournament;
             var tournament = await _writeRepository.GetTournamentWithParticipants(participantInTournament.TournamentId);

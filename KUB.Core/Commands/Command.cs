@@ -16,5 +16,6 @@ namespace KUB.Core.Commands
     public abstract class Command : ICommand
     {
         public BaseEvent Event { get; set; }
+        public BaseEntity Aggregate { get; set; }
     }
 }

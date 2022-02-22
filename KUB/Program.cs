@@ -37,6 +37,12 @@ builder.Services.AddScoped<IUnitOfWork<Tournament, BaseEvent>, TournamentUnitOfW
 builder.Services.AddScoped<ITournamentCommandHandler, TournamentCommandHandler>();
 builder.Services.AddSqlServer<ManagementGamesDB>(configuration.GetConnectionString("LocalDB"));
 builder.Services.AddSingleton(mapper);
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+}));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,7 +51,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("MyPolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

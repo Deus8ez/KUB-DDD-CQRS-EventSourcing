@@ -21,7 +21,7 @@ namespace KUB.Web.Controllers
     [ApiController]
     public class ParticipantsController : BaseController<Participant, ParticipantDto, ParticipantPostRequest>
     {
-        public ParticipantsController(IService<ParticipantDto, Participant> service, IMapper mapper) : base(service, mapper)
+        public ParticipantsController(IParticipantService<ParticipantDto, Participant> service, IMapper mapper) : base(service, mapper)
         {
         }
     }

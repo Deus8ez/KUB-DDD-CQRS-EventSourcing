@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace KUB.Core.Commands
 {
-    public class TournamentAddParticipantCommand : Command, ICommand
+    public class RemoveParticipantCommand : Command, ICommand
     {
         public ParticipantInTournament ParticipantInTournament { get; set; }
-        public TournamentAddParticipantCommand(ParticipantInTournament participantInTournament)
+        public RemoveParticipantCommand(ParticipantInTournament participantInTournament)
         {
             ParticipantInTournament = participantInTournament;
             Event = new BaseEvent();
-            Event.SetEvent(participantInTournament.TournamentId, "AddParticipantToTournament", participantInTournament);
+            Event.SetEvent(participantInTournament.TournamentId, "RemoveParticipantFromTournament", participantInTournament);
         }
     }
 }
