@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace KUB.SharedKernel.DTOModels.Tournament
 {
-    public class TournamentDto
+    public class Dto
+    {
+
+    }
+    public class TournamentDto : Dto
     {
         public Guid Id { get; set; }
         public string TournamentName { get; set; }

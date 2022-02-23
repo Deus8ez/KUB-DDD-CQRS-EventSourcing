@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace KUB.Core.Interfaces
 {
-    public interface IEventRepository<TEvent>
-        where TEvent : BaseEvent
+    public interface IEventRepository
     {
         Task<int> EventsCountAsync(Guid aggregateId);
 
-        Task<IEnumerable<TEvent>> EventsAsync(Guid aggregateId);
+        Task<IEnumerable<BaseEvent>> EventsAsync(Guid aggregateId);
 
-        Task AppendEventAsync(TEvent eventModel);
+        Task AppendEventAsync(BaseEvent eventModel);
     }
 }

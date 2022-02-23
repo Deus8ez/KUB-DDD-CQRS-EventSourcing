@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KUB.Infrastructure.Data.Repositories
 {
-    public class EventRepository : IEventRepository<BaseEvent>
+    public class EventRepository : IEventRepository
     {
         ManagementGamesDB _context;
         public EventRepository(ManagementGamesDB context)

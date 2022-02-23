@@ -9,26 +9,26 @@ using System.Threading.Tasks;
 
 namespace KUB.Infrastructure.Data.UnitsOfWork
 {
-    public class TournamentUnitOfWork : IUnitOfWork<Tournament, BaseEvent>
+    public class UnitOfWork : IUnitOfWork
     {
         protected ManagementGamesDB _context;
-        IWriteRepository<Tournament> _writeRepository;
-        IEventRepository<BaseEvent> _eventRepository;
+        IBaseWriteRepository _writeRepository;
+        IEventRepository _eventRepository;
         IBaseWriteRepository _baseWriteRepository;
-        public TournamentUnitOfWork(ManagementGamesDB context)
+        public UnitOfWork(ManagementGamesDB context)
         {
             _context = context;
-            _writeRepository = new TournamentWriteRepository(_context);
+            _writeRepository = new BaseWriteRepository(_context);
             _eventRepository = new EventRepository(_context);
             _baseWriteRepository = new BaseWriteRepository(_context);
         }
 
-        public IWriteRepository<Tournament> WriteRepository()
+        public IBaseWriteRepository WriteRepository()
         {
             return _writeRepository;
         }
 
-        public IEventRepository<BaseEvent> EventRepository()
+        public IEventRepository EventRepository()
         {
             return _eventRepository;
         }

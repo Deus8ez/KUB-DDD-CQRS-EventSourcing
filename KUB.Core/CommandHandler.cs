@@ -14,12 +14,12 @@ using System.Threading.Tasks;
 
 namespace KUB.Core
 {
-    public class TournamentCommandHandler : ITournamentCommandHandler
+    public class CommandHandler : IBaseCommandHandler
     {
-        IUnitOfWork<Tournament, BaseEvent> _unitOfWork;
+        IUnitOfWork _unitOfWork;
         private IBaseWriteRepository _writeRepository;
-        private IEventRepository<BaseEvent> _eventRepository;
-        public TournamentCommandHandler(IUnitOfWork<Tournament, BaseEvent> unitOfWork)
+        private IEventRepository _eventRepository;
+        public CommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             _writeRepository = unitOfWork.BaseWriteRepository();

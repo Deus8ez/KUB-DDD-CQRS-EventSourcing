@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace KUB.Core.Interfaces
 {
-    public interface IUnitOfWork<T1, T2> : IDisposable
-    where T1 : BaseEntity, new()
-    where T2 : BaseEvent, new()
+    public interface IUnitOfWork : IDisposable
     {
-        public IWriteRepository<T1> WriteRepository();
         public IBaseWriteRepository BaseWriteRepository();
-        public IEventRepository<T2> EventRepository();
+        public IEventRepository EventRepository();
         Task SaveAsync();
     }
 }

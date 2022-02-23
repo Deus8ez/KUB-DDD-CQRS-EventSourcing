@@ -28,13 +28,16 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IReadRepository<TournamentDto>, TournamentReadRepository>();
-builder.Services.AddScoped<IWriteRepository<Tournament>, TournamentWriteRepository>();
+builder.Services.AddScoped<ITournamentReadRepository, TournamentReadRepository>();
+builder.Services.AddScoped<IParticipantReadRepository, ParticipantReadRepository>();
+//builder.Services.AddScoped<ISchoolReadRepository, SchoolReadRepository>();
 builder.Services.AddScoped<IBaseWriteRepository, BaseWriteRepository>();
-builder.Services.AddScoped<IEventRepository<BaseEvent>, EventRepository>();
-builder.Services.AddScoped<ITournamentService<TournamentDto, Tournament>, TournamentService>();
-builder.Services.AddScoped<IUnitOfWork<Tournament, BaseEvent>, TournamentUnitOfWork>();
-builder.Services.AddScoped<ITournamentCommandHandler, TournamentCommandHandler>();
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<ITournamentService, Service>();
+builder.Services.AddScoped<IParticipantService, Service>();
+//builder.Services.AddScoped<ISchoolService, Service>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IBaseCommandHandler, CommandHandler>();
 builder.Services.AddSqlServer<ManagementGamesDB>(configuration.GetConnectionString("LocalDB"));
 builder.Services.AddSingleton(mapper);
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>

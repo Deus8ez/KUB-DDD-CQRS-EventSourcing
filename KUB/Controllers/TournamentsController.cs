@@ -25,9 +25,10 @@ namespace KUB.Web.Controllers
     [ApiController]
     public class TournamentsController : BaseController<Tournament, TournamentDto, TournamentRegistrationPostRequest>
     {
-        private ITournamentService<TournamentDto, Tournament> _tournamentService;
+        private ITournamentService _tournamentService;
         private IMapper _mapper;
-        public TournamentsController(ITournamentService<TournamentDto, Tournament> service, IMapper mapper) : base(service, mapper)
+
+        public TournamentsController(ITournamentService service, IMapper mapper, ITournamentReadRepository readRepository) : base(service, mapper, readRepository)
         {
             _tournamentService = service;
             _mapper = mapper;

@@ -197,7 +197,7 @@ namespace KUB.Infrastructure.Data
 
             var tournaments = new List<Tournament>();
 
-            for(int i = 0; i < 100; i++)
+            for(int i = 0; i < 30; i++)
             {
                 tournaments.Add(new Tournament
                 {
@@ -210,6 +210,7 @@ namespace KUB.Infrastructure.Data
                     TournamentGridId = teams.Id,
                     TournamentName = "Турнир в Томске" + i,
                     TournamentTypeId = practice.Id,
+                    Number = i
                 });
             };
 

@@ -5,9 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KUB.Core.Models
 {
-    public class School
+    public class School : BaseEntity
     {
-        public Guid Id { get; set; }
         public string SchoolName { get; set; }
         public virtual ICollection<ParticipantInSchool> ParticipantInSchools { get; set; }
     }

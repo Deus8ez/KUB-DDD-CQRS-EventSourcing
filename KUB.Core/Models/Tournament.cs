@@ -20,6 +20,7 @@ namespace KUB.Core.Models
         public Guid TournamentGridId { get; set; }
         public virtual TournamentGridType TournamentGrid { get; set; }
         public Guid LocationId { get; set; }
+        public int Number { get; set; }
         public virtual Location Location { get; set; }
         public virtual ICollection<JuryInPanel> JuryInPanels { get; set; }
         public virtual ICollection<ParticipantInTournament> ParticipantInTournaments { get; set; }

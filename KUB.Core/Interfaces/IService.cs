@@ -1,5 +1,6 @@
 ﻿using KUB.Core.Models;
 using KUB.SharedKernel;
+using KUB.SharedKernel.DTOModels.Tournament;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,8 @@ using System.Threading.Tasks;
 
 namespace KUB.Core.Interfaces
 {
-    public interface IService<TEntity> 
+    public interface IService 
     {
-
         Task<IEnumerable<BaseEvent>> GetEventsAsync(Guid id);
         
         /* Commands */
@@ -21,23 +21,18 @@ namespace KUB.Core.Interfaces
         // Delete Item
         Task DeleteAsync<TEntity>(Guid id) where TEntity : BaseEntity, new();
     }
-    public interface ITournamentService<TEntityDto, TEntity> : IService<TEntity>
+    public interface ITournamentService : IService
     {
-        /* ReadModel  */
-        // Get all
-        Task<IEnumerable<TEntityDto>> GetAllAsync();
 
-        // Get one
-        Task<TEntityDto> GetAsync<TEntityDto>(Guid id);
         Task AddParticipant(ParticipantInTournament participantInTournament);
         Task RemoveParticipant(ParticipantInTournament participantInTournament);
     }
 
-    public interface ISchoolService<TEntityDto, TEntity> : IService<TEntity>
+    public interface ISchoolService : IService
     {
     }
 
-    public interface IParticipantService<TEntityDto, TEntity> : IService<TEntity>
+    public interface IParticipantService : IService
     {
     }
 }

@@ -60,36 +60,4 @@ namespace KUB.Infrastructure.Data.Repositories
             await _context.SaveChangesAsync();
         }
     }
-
-    public class TournamentWriteRepository : IWriteRepository<Tournament>
-    {
-        public ManagementGamesDB _context;
-        public TournamentWriteRepository(ManagementGamesDB context)
-        {
-            _context = context;
-        }
-
-        public async Task<Tournament> GetEntityByIdAsync(Guid id)
-        {
-            var item = await _context.Tournaments.FindAsync(id);
-            return item;
-        }
-
-        public async Task Delete(Guid id)
-        {
-            var item = await _context.Tournaments.FindAsync(id);
-            _context.Tournaments.Remove(item);
-        }
-
-        public async Task InsertAsync(Tournament obj)
-        {
-            await _context.Tournaments.AddAsync(obj);
-        }
-
-        public void Update(Tournament obj)
-        {
-            _context.Tournaments.Attach(obj);
-            _context.Entry(obj).State = EntityState.Modified;
-        }
-    }
 }
