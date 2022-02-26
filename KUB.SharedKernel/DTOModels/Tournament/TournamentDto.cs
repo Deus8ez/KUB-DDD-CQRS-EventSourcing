@@ -20,6 +20,8 @@ namespace KUB.SharedKernel.DTOModels.Tournament
         public string TournamentFormat { get; set; }
         public string TournamentType { get; set; }
         public string TournamentGrid { get; set; }
-        public string Location { get; set; }
+        public string City { get; set; }
+        public string Address { get; set; }
+
     }
 }

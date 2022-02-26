@@ -24,15 +24,17 @@ namespace KUB.Core.Interfaces
         Task<List<TournamentDto>> GetAllAsync();
     }
 
-    public interface IParticipantReadRepository : IReadRepository<ParticipantDto>
+    public interface IParticipantReadRepository : IReadRepository<ParticipantAndRolesDto>
     {
-        Task<ParticipantDto> GetByIdAsync(Guid id);
-        Task<List<ParticipantDto>> GetAllAsync(int offset, int rowNumber);
+        Task<ParticipantAndRolesDto> GetByIdAsync(Guid id);
+        Task<List<ParticipantAndRolesDto>> GetAllAsync();
+        Task<List<ParticipantAndRolesDto>> GetAllAsync(int offset, int rowNumber);
     }
 
     public interface ISchoolReadRepository : IReadRepository<SchoolDto>
     {
         Task<SchoolDto> GetByIdAsync(Guid id);
+        Task<List<SchoolDto>> GetAllAsync();
         Task<List<SchoolDto>> GetAllAsync(int offset, int rowNumber);
     }
 }

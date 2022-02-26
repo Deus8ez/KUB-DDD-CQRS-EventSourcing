@@ -9,6 +9,8 @@ using KUB.Infrastructure.Data.UnitsOfWork;
 using KUB.SharedKernel.DTOModels.Tournament;
 using KUB.SharedKernel.DTOModels.Tournament.Requests;
 using KUB.Web.Services;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration configuration = new ConfigurationBuilder()
@@ -24,7 +26,9 @@ IMapper mapper = mapperConfig.CreateMapper();
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+            options.JsonSerializerOptions.Converters.Add(new TimeSpanToStringConverter())); ;
+builder.Services.AddSwaggerGen(c => c.MapType<TimeSpan?>(() => new OpenApiSchema { Type = "string", Example = new OpenApiString("00:00:00") }));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

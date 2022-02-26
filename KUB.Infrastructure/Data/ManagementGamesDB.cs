@@ -22,7 +22,6 @@ namespace KUB.Infrastructure.Data
         public virtual DbSet<BaseEvent> Events { get; set; }
         public virtual DbSet<JuryInPanel> JuryInPanels { get; set; }
         public virtual DbSet<JuryPanel> JuryPanels { get; set; }
-        public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Participant> Participants { get; set; }
         public virtual DbSet<ParticipantInSchool> ParticipantInSchools { get; set; }
         public virtual DbSet<ParticipantInTournament> ParticipantInTournaments { get; set; }
@@ -187,30 +186,23 @@ namespace KUB.Infrastructure.Data
                     }
                 );
 
-            var location = new Location
-            {
-                Address = "Пушкина 1",
-                City = "Томск",
-                Id = Guid.NewGuid(),
-            };
-            modelBuilder.Entity<Location>().HasData(location);
-
             var tournaments = new List<Tournament>();
 
-            for(int i = 0; i < 30; i++)
+            for(int i = 0; i < 1; i++)
             {
                 tournaments.Add(new Tournament
                 {
                     Id = Guid.NewGuid(),
                     Date = new DateTime(),
                     EndTime = new TimeSpan(0, 0, 0, 0),
-                    LocationId = location.Id,
                     StartTime = new TimeSpan(0, 0, 0, 0),
                     TournamentFormatId = offline.Id,
                     TournamentGridId = teams.Id,
                     TournamentName = "Турнир в Томске" + i,
                     TournamentTypeId = practice.Id,
-                    Number = i
+                    Number = i,
+                    Address = "Пушкина" + i,
+                    City = "Томск"
                 });
             };
 

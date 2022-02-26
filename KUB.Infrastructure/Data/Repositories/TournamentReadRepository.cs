@@ -3,6 +3,7 @@ using KUB.Core.Models;
 using KUB.SharedKernel.DTOModels;
 using KUB.SharedKernel.DTOModels.Participant;
 using KUB.SharedKernel.DTOModels.Tournament;
+using KUB.SharedKernel.DTOModels.Tournament.Responses;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +26,7 @@ namespace KUB.Infrastructure.Data.Repositories
             _connectionString = configuration.GetConnectionString("LocalDB");
         }
 
+
         public async Task<List<TournamentDto>> GetAllAsync()
         {
             var connection = ConnectToDb(_connectionString);
@@ -44,12 +46,12 @@ namespace KUB.Infrastructure.Data.Repositories
                         "TournamentFormats.Format, " +
                         "TournamentGridTypes.Type, " +
                         "TournamentTypes.Type, " +
-                        "Locations.City " +
+                        "Tournaments.City, " +
+                        "Tournaments.Address " +
                         "from Tournaments " +
                         "inner join TournamentFormats on Tournaments.TournamentFormatId = TournamentFormats.Id " +
                         "inner join TournamentGridTypes on Tournaments.TournamentGridId = TournamentGridTypes.Id " +
                         "inner join TournamentTypes on Tournaments.TournamentTypeId = TournamentTypes.Id " +
-                        "inner join Locations on Tournaments.LocationId = Locations.Id " +
                         "ORDER BY Tournaments.Date ",
                   connection);
 
@@ -67,12 +69,13 @@ namespace KUB.Infrastructure.Data.Repositories
                             Id = reader.GetGuid(0),
                             TournamentName = reader.GetString(1),
                             Date = reader.GetDateTime(2),
-                            StartTime = reader.GetTimeSpan(3),
-                            EndTime = reader.GetTimeSpan(4),
+                            StartTime = reader.IsDBNull(3) ? null : reader.GetTimeSpan(3),
+                            EndTime = reader.IsDBNull(4) ? null : reader.GetTimeSpan(4),
                             TournamentFormat = reader.GetString(5),
                             TournamentGrid = reader.GetString(6),
                             TournamentType = reader.GetString(7),
-                            Location = reader.GetString(8),
+                            City = reader.GetString(8),
+                            Address = reader.GetString(9),
                         });
                     }
                 }
@@ -80,7 +83,6 @@ namespace KUB.Infrastructure.Data.Repositories
                 {
                     Console.WriteLine("No rows found.");
                 }
-
 
 
                 stopWatch.Stop();
@@ -109,12 +111,12 @@ namespace KUB.Infrastructure.Data.Repositories
                         "TournamentFormats.Format, " +
                         "TournamentGridTypes.Type, " +
                         "TournamentTypes.Type, " +
-                        "Locations.City " +
+                        "Tournaments.City, " +
+                        "Tournaments.Address " +
                         "from Tournaments " +
                         "inner join TournamentFormats on Tournaments.TournamentFormatId = TournamentFormats.Id " +
                         "inner join TournamentGridTypes on Tournaments.TournamentGridId = TournamentGridTypes.Id " +
                         "inner join TournamentTypes on Tournaments.TournamentTypeId = TournamentTypes.Id " +
-                        "inner join Locations on Tournaments.LocationId = Locations.Id " +
                         "ORDER BY Tournaments.Date OFFSET @offset ROWS FETCH NEXT @rowNumber ROWS ONLY ",
                   connection);
                 command.Parameters.Add("@offset", SqlDbType.Int);
@@ -142,7 +144,8 @@ namespace KUB.Infrastructure.Data.Repositories
                             TournamentFormat = reader.GetString(5),
                             TournamentGrid = reader.GetString(6),
                             TournamentType = reader.GetString(7),
-                            Location = reader.GetString(8),
+                            City = reader.GetString(8),
+                            Address = reader.GetString(9),
                         });
                     }
                 }
@@ -178,7 +181,8 @@ namespace KUB.Infrastructure.Data.Repositories
                     "TournamentFormats.Format, " +
                     "TournamentGridTypes.Type, " +
                     "TournamentTypes.Type, " +
-                    "Locations.City " +
+                    "Tournaments.City, " +
+                    "Tournaments.Address " +
                     "from Tournaments " +
                     "inner join TournamentFormats on Tournaments.TournamentFormatId = TournamentFormats.Id " +
                     "inner join TournamentGridTypes on Tournaments.TournamentGridId = TournamentGridTypes.Id " +
@@ -207,7 +211,8 @@ namespace KUB.Infrastructure.Data.Repositories
                             TournamentFormat = reader.GetString(5),
                             TournamentGrid = reader.GetString(6),
                             TournamentType = reader.GetString(7),
-                            Location = reader.GetString(8),
+                            City = reader.GetString(8),
+                            Address = reader.GetString(9),
                         };
                     }
                 }

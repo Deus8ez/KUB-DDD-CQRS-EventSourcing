@@ -27,21 +27,24 @@ namespace KUB.Core
 
         }
 
-        public async Task Handle(CreateCommand command)
+        public async Task Handle<T>(CreateCommand<T> command)
+            where T : BaseEntity, new()
         {
             await _writeRepository.InsertAsync(command.Aggregate);
             await _eventRepository.AppendEventAsync(command.Event);
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task Handle(UpdateCommand command)
+        public async Task Handle<T>(UpdateCommand<T> command)
+            where T : BaseEntity, new()
         {
             _writeRepository.Update(command.Aggregate);
             await _eventRepository.AppendEventAsync(command.Event);
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task Handle(DeleteCommand command)
+        public async Task Handle<T>(DeleteCommand<T> command)
+            where T : BaseEntity, new()
         {
             await _writeRepository.Delete<Tournament>(command.AggregateId);
             await _eventRepository.AppendEventAsync(command.Event);

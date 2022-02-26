@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace KUB.Core.Commands
 {
-    public class DeleteCommand : Command, ICommand
+    public class DeleteCommand<T> : Command<T>, ICommand
+        where T : BaseEntity, new()
     {
         public Guid AggregateId { get; set; }
 

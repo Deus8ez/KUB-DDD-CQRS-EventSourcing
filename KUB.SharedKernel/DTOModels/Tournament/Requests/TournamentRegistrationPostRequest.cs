@@ -16,7 +16,7 @@ namespace KUB.SharedKernel.DTOModels.Tournament.Requests
         public Guid TournamentFormatId { get; set; }
         public Guid TournamentTypeId { get; set; }
         public Guid TournamentGridId { get; set; }
-        public Guid LocationId { get; set; }
-
+        public string City { get; set; }
+        public string Address { get; set; }
     }
 }

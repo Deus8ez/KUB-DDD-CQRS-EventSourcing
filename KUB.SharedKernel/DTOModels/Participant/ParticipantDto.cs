@@ -7,9 +7,15 @@ using System.Threading.Tasks;
 
 namespace KUB.SharedKernel.DTOModels.Participant
 {
+    public class ParticipantAndRolesDto : Dto
+    {
+        public List<ParticipantDto> Participants { get; set; } = new List<ParticipantDto>();
+        public List<RoleDto> Roles { get; set; } = new List<RoleDto>();
+    }
+
     public class ParticipantDto : Dto
     {
-        public int ParticipantId { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronym { get; set; }
@@ -17,5 +23,13 @@ namespace KUB.SharedKernel.DTOModels.Participant
         public int? ClassicGameRank { get; set; }
         public int? BlitzGameRank { get; set; }
         public bool CanBeAJury { get; set; }
+        public string SchoolName { get; set; }
+
+    }
+
+    public class RoleDto
+    {
+        public Guid Id { get; set; }
+        public string RoleName { get; set; }
     }
 }

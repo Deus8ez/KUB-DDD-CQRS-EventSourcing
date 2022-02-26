@@ -11,9 +11,10 @@ using System.Threading.Tasks;
 
 namespace KUB.Core.Commands
 {
-    public class CreateCommand : Command, ICommand
+    public class CreateCommand<T> : Command<T>, ICommand
+        where T : BaseEntity, new()
     {
-        public CreateCommand(BaseEntity data, string commandName)
+        public CreateCommand(T data, string commandName)
         {
             Aggregate = data;
             Aggregate.Id = Guid.NewGuid();

@@ -13,26 +13,19 @@ namespace KUB.Core.Interfaces
         Task Handle(ICommand command);
     }
 
-    public interface IBaseCommandHandler : 
-        ICommandHandler<CreateCommand>,
-        ICommandHandler<UpdateCommand>,
-        ICommandHandler<DeleteCommand>,
-        ICommandHandler<AddParticipantCommand>,
-        ICommandHandler<RemoveParticipantCommand>
+    public interface IUpdateCommand
     {
+
     }
 
-    //public interface ITournamentCommandHandler :
-    //ICommandHandler<TournamentCreateCommand>,
-    //ICommandHandler<TournamentUpdateCommand>,
-    //ICommandHandler<TournamentDeleteCommand>,
-    //ICommandHandler<TournamentAddParticipantCommand>,
-    //ICommandHandler<TournamentRemoveParticipantCommand>
-    //{
-    //}
+    public interface IBaseCommandHandler  
 
-    public interface IBaseTournamentHandler 
     {
+        Task Handle<T>(UpdateCommand<T> command) where T : BaseEntity, new();
+        Task Handle<T>(CreateCommand<T> command) where T : BaseEntity, new();
+        Task Handle<T>(DeleteCommand<T> command) where T : BaseEntity, new();
+        Task Handle(AddParticipantCommand command);
+        Task Handle(RemoveParticipantCommand command);
 
     }
 }

@@ -82,13 +82,15 @@ namespace KUB.Web.Controllers
         }
 
         [HttpPut]
-        public virtual async Task<IActionResult> Update(TRequest data)
+        [Route("{id:guid}")]
+        public virtual async Task<IActionResult> Update(Guid id, TRequest data)
         {
             var entity = _mapper.Map<TEntity>(data);
+            entity.Id = id; 
             try
             {
                 await _service.PutAsync<TEntity>(entity);
-            } catch
+            } catch (Exception ex)
             {
                 return StatusCode(500);
             }

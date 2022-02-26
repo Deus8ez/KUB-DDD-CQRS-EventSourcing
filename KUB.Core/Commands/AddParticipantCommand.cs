@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KUB.Core.Commands
 {
-    public class AddParticipantCommand : Command, ICommand
+    public class AddParticipantCommand : Command<ParticipantInTournament>, ICommand
     {
         public ParticipantInTournament ParticipantInTournament { get; set; }
         public AddParticipantCommand(ParticipantInTournament participantInTournament)

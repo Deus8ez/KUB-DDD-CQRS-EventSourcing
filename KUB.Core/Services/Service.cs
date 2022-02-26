@@ -37,6 +37,7 @@ namespace KUB.Core
             return result;
         }
 
+
         public async Task AddParticipant(ParticipantInTournament participantInTournament)
         {
             await _commandHandler.Handle(new AddParticipantCommand(participantInTournament));
@@ -50,19 +51,19 @@ namespace KUB.Core
         public async Task PostAsync<TEntity>(TEntity item)
             where TEntity : BaseEntity, new()
         {
-            await _commandHandler.Handle(new CreateCommand(item, "Create" + typeof(TEntity).Name));
+            await _commandHandler.Handle<TEntity>(new CreateCommand<TEntity>(item, "Create" + typeof(TEntity).Name));
         }
 
         public async Task PutAsync<TEntity>(TEntity item)
             where TEntity : BaseEntity, new()
         {
-            await _commandHandler.Handle(new UpdateCommand(item, "Update" + typeof(TEntity).Name));
+            await _commandHandler.Handle(new UpdateCommand<TEntity>(item, "Update" + typeof(TEntity).Name));
         }
 
         public async Task DeleteAsync<TEntity>(Guid id)
             where TEntity : BaseEntity, new()
         {
-            await _commandHandler.Handle(new DeleteCommand(id, "Delete" + typeof(TEntity).Name));
+            await _commandHandler.Handle(new DeleteCommand<TEntity>(id, "Delete" + typeof(TEntity).Name));
         }
     }
 }

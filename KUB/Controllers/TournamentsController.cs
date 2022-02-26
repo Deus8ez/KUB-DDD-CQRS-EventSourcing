@@ -18,6 +18,7 @@ using KUB.SharedKernel.DTOModels.Tournament;
 using KUB.Core.Interfaces;
 using System.Diagnostics;
 using AutoMapper;
+using KUB.Web.ViewModels;
 
 namespace KUB.Web.Controllers
 {
@@ -27,11 +28,26 @@ namespace KUB.Web.Controllers
     {
         private ITournamentService _tournamentService;
         private IMapper _mapper;
-
-        public TournamentsController(ITournamentService service, IMapper mapper, ITournamentReadRepository readRepository) : base(service, mapper, readRepository)
+        private ManagementGamesDB _context;
+        public TournamentsController(ITournamentService service, IMapper mapper, ITournamentReadRepository readRepository, ManagementGamesDB context) : base(service, mapper, readRepository)
         {
             _tournamentService = service;
             _mapper = mapper;
+            _context = context; 
+        }
+
+        [HttpGet]
+        [Route("meta")]
+        public ActionResult<TournamentMeta> GetMeta()
+        {
+            TournamentMeta data = new TournamentMeta
+            {
+                tournamentGridTypes = _context.TournamentGridTypes.ToList(),
+                tournamentFormats = _context.TournamentFormats.ToList(),
+                tournamentTypes = _context.TournamentTypes.ToList()
+            };
+
+            return data;
         }
 
         [HttpPut]

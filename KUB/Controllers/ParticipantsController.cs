@@ -19,7 +19,7 @@ namespace KUB.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ParticipantsController : BaseController<Participant, ParticipantDto, ParticipantPostRequest>
+    public class ParticipantsController : BaseController<Participant, ParticipantAndRolesDto, ParticipantPostRequest>
     {
         public ParticipantsController(IParticipantService service, IMapper mapper, IParticipantReadRepository readRepository) : base(service, mapper, readRepository)
         {

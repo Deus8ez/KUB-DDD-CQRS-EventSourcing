@@ -19,7 +19,6 @@ namespace KUB.Infrastructure.Data.QueryExtensions
                 StartTime = e.StartTime,
                 TournamentFormat = e.TournamentFormat.Format,
                 TournamentName = e.TournamentName,
-                Location = e.Location.Address,
                 TournamentGrid = e.TournamentGrid.Type,
                 TournamentType = e.TournamentType.Type,
                 Id = e.Id,
