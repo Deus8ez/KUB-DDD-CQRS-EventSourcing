@@ -23,8 +23,9 @@ namespace KUB.Core.Interfaces
     }
     public interface ITournamentService : IService
     {
-
+        Task UpdateTournament(Tournament tournament, List<ParticipantInTournament> participantInTournaments);
         Task AddParticipant(ParticipantInTournament participantInTournament);
+        Task AddParticipants(Tournament tournament, List<ParticipantInTournament> participantInTournaments);
         Task RemoveParticipant(ParticipantInTournament participantInTournament);
     }
 

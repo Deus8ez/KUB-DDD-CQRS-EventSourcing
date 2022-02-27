@@ -10,13 +10,12 @@ namespace KUB.Web.Services
         public MappingProfile()
         {
             // Add as many of these lines as you need to map your objects
-            CreateMap<TournamentRegistrationPostRequest, Tournament>();
+            CreateMap<TournamentPostRequest, Tournament>();
             CreateMap<Tournament, TournamentDto>();
             CreateMap<ParticipantRegistrationPostRequest, ParticipantInTournament>();
             CreateMap<ParticipantInTournamentDeletionRequest, ParticipantInTournament>();
-
             CreateMap<TournamentDto, Tournament>();
-
+            
         }
     }
 }

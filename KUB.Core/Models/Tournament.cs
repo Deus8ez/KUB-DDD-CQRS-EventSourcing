@@ -21,7 +21,7 @@ namespace KUB.Core.Models
         public virtual TournamentGridType TournamentGrid { get; set; }
         public string City { get; set; }
         public string Address { get; set; }
-        public int Number { get; set; }
+        public int? Number { get; set; }
         public virtual ICollection<JuryInPanel> JuryInPanels { get; set; }
         public virtual ICollection<ParticipantInTournament> ParticipantInTournaments { get; set; }
 
@@ -29,6 +29,11 @@ namespace KUB.Core.Models
         {
             ParticipantInTournaments = new Collection<ParticipantInTournament>();
             ParticipantInTournaments.Add(participantInTournament);
+        }
+
+        public void ClearParticipants()
+        {
+            ParticipantInTournaments.Clear();
         }
 
         public void RemoveParticipant(ParticipantInTournament participantInTournament)

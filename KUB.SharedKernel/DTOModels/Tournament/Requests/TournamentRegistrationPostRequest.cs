@@ -9,14 +9,7 @@ namespace KUB.SharedKernel.DTOModels.Tournament.Requests
 {
     public class TournamentRegistrationPostRequest
     {
-        public string TournamentName { get; set; }
-        public DateTime Date { get; set; }
-        public TimeSpan? StartTime { get; set; }
-        public TimeSpan? EndTime { get; set; }
-        public Guid TournamentFormatId { get; set; }
-        public Guid TournamentTypeId { get; set; }
-        public Guid TournamentGridId { get; set; }
-        public string City { get; set; }
-        public string Address { get; set; }
+        public IEnumerable<ParticipantRegistrationPostRequest>? AddedParticipantIds { get; set; }
+        public TournamentPostRequest Tournament { get; set; }
     }
 }

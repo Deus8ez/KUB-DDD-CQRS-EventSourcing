@@ -50,25 +50,56 @@ namespace KUB.Web.Controllers
             return data;
         }
 
-        [HttpPut]
-        [Route("addParticipant")]
-        public async Task<IActionResult> AddParticipant(ParticipantRegistrationPostRequest participantRegistrationPostRequest)
+        [HttpPost]
+        public override async Task<IActionResult> Post(TournamentRegistrationPostRequest participantRegistrationPostRequest)
         {
+            List<ParticipantInTournament> participantInTournaments = new List<ParticipantInTournament>();
+            var tournament = _mapper.Map<Tournament>(participantRegistrationPostRequest.Tournament);
 
-            var participantInTournament = _mapper.Map<ParticipantInTournament>(participantRegistrationPostRequest);
+            foreach (var item in participantRegistrationPostRequest.AddedParticipantIds)
+            {
+                var participantInTournament = _mapper.Map<ParticipantInTournament>(item);
+                participantInTournaments.Add(participantInTournament);
+            }
 
-            await _tournamentService.AddParticipant(participantInTournament);
+
+            await _tournamentService.AddParticipants(tournament, participantInTournaments);
 
             return Ok();
         }
 
-        [HttpDelete]
-        [Route("removeParticipant")]
-        public async Task<IActionResult> RemoveParticipant(ParticipantInTournamentDeletionRequest participantRegistrationPostRequest)
+        [HttpPut]
+        [Route("{id:guid}")]
+        public override async Task<IActionResult> Update(Guid id, TournamentRegistrationPostRequest participantRegistrationPostRequest)
         {
-            var participantInTournament = _mapper.Map<ParticipantInTournament>(participantRegistrationPostRequest);
+            List<ParticipantInTournament> participantInTournaments = new List<ParticipantInTournament>();
+            var tournament = _mapper.Map<Tournament>(participantRegistrationPostRequest.Tournament);
+            tournament.Id = id;
 
-            await _tournamentService.RemoveParticipant(participantInTournament);
+            if (participantRegistrationPostRequest.AddedParticipantIds != null)
+            {
+                foreach (var item in participantRegistrationPostRequest.AddedParticipantIds)
+                {
+                    var participantInTournament = _mapper.Map<ParticipantInTournament>(item);
+                    participantInTournaments.Add(participantInTournament);
+                }
+            }
+
+            await _tournamentService.UpdateTournament(tournament, participantInTournaments);
+
+            return NoContent();
+        }
+
+        [HttpPost]
+        [Route("removeParticipants")]
+        public async Task<IActionResult> RemoveParticipant(List<ParticipantInTournamentDeletionRequest> participantRegistrationPostRequest)
+        {
+            foreach(var item in participantRegistrationPostRequest)
+            {
+                var participantInTournament = _mapper.Map<ParticipantInTournament>(item);
+
+                await _tournamentService.RemoveParticipant(participantInTournament);
+            }
 
             return Ok();
         }

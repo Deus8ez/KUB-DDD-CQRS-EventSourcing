@@ -24,8 +24,9 @@ namespace KUB.Core.Interfaces
         Task Handle<T>(UpdateCommand<T> command) where T : BaseEntity, new();
         Task Handle<T>(CreateCommand<T> command) where T : BaseEntity, new();
         Task Handle<T>(DeleteCommand<T> command) where T : BaseEntity, new();
+        Task Handle(AddParticipantsCommand command);
         Task Handle(AddParticipantCommand command);
         Task Handle(RemoveParticipantCommand command);
-
+        Task Handle(UpdateTournamentCommand command);
     }
 }

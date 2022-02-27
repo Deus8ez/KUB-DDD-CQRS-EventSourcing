@@ -10,12 +10,11 @@ namespace KUB.SharedKernel.DTOModels.Tournament.Requests
     {
         public Guid ParticipantId { get; set; }
         public Guid? RoleId { get; set; }
-        public Guid TournamentId { get; set; }
     }
 
     public class ParticipantInTournamentDeletionRequest
     {
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
         public Guid ParticipantId { get; set; }
         public Guid? RoleId { get; set; }
         public Guid TournamentId { get; set; }

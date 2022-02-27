@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KUB.Infrastructure.Migrations
 {
     [DbContext(typeof(ManagementGamesDB))]
-    [Migration("20220226111408_init")]
+    [Migration("20220227113844_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -92,17 +92,17 @@ namespace KUB.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9ca4c875-3c7c-417a-b4fb-80f84daab701"),
+                            Id = new Guid("35260ea7-f8c0-4dc9-b5db-5eb1c3f6f9fd"),
                             Panel = "Нанимающиеся на работу"
                         },
                         new
                         {
-                            Id = new Guid("ed201a24-dd57-47cb-b6d1-e1a132d5862b"),
+                            Id = new Guid("7e96ada8-98ec-42bc-92bf-c7fa450008d3"),
                             Panel = "Направляющие на переговоры"
                         },
                         new
                         {
-                            Id = new Guid("88f81266-0059-4bb2-837b-4c49f8bc9f2f"),
+                            Id = new Guid("09b5071a-007f-4c00-bec7-35d0e7ac322a"),
                             Panel = "Направляющие на переговоры"
                         });
                 });
@@ -144,7 +144,7 @@ namespace KUB.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a3b55f01-76ea-4c75-a9a6-cb815782048c"),
+                            Id = new Guid("18bd477b-ca58-4043-a604-97f982af5adb"),
                             BlitzGameRank = 1,
                             CanBeAJury = true,
                             ClassicGameRank = 1,
@@ -186,7 +186,7 @@ namespace KUB.Infrastructure.Migrations
                     b.Property<Guid>("ParticipantId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RoleId")
+                    b.Property<Guid?>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("TournamentId")
@@ -220,42 +220,42 @@ namespace KUB.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("32a3f9f9-9e66-41ca-9a97-a93b19a167b1"),
+                            Id = new Guid("b932ba3e-db64-46c3-a9c6-b670e3c6bfb4"),
                             RoleName = "Не выбрана"
                         },
                         new
                         {
-                            Id = new Guid("3b1b9c1f-772f-44c9-8838-a998ee546b11"),
+                            Id = new Guid("3ad11b96-7179-4b1b-b952-d424baa65063"),
                             RoleName = "Зритель"
                         },
                         new
                         {
-                            Id = new Guid("6cb3cd92-90f6-4a05-b245-e6e2c6d645e6"),
+                            Id = new Guid("995eddbf-f325-4d2d-aac1-0c50a6f2fdda"),
                             RoleName = "Игрок"
                         },
                         new
                         {
-                            Id = new Guid("e0c98ccb-3827-40fe-98df-609f16f55cc1"),
+                            Id = new Guid("db4aa28c-8972-4fe7-8e8e-23a834da51ed"),
                             RoleName = "Секундант"
                         },
                         new
                         {
-                            Id = new Guid("2934aac0-bdd4-4e24-b748-29586ab52e34"),
+                            Id = new Guid("34af7e1d-650e-442c-b3be-7009cc663452"),
                             RoleName = "Судья"
                         },
                         new
                         {
-                            Id = new Guid("553b4bf6-380d-449e-8518-0a9b1b9e24cb"),
+                            Id = new Guid("8a26c2d5-732d-4f86-949a-ccd1dadc008c"),
                             RoleName = "Арбитр"
                         },
                         new
                         {
-                            Id = new Guid("6d1763a6-17e2-452a-81dc-d6ba029082b1"),
+                            Id = new Guid("aca33ae0-fa95-4646-a1e6-109e083bb004"),
                             RoleName = "Секретарь"
                         },
                         new
                         {
-                            Id = new Guid("bda8d486-82fe-447c-8e79-0c4949da0e2d"),
+                            Id = new Guid("ea0d205d-cb52-4ce3-a5e5-4268aabc96e1"),
                             RoleName = "Тренер"
                         });
                 });
@@ -277,7 +277,7 @@ namespace KUB.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cc0eb01f-1664-4a60-9b5a-1103537b3d49"),
+                            Id = new Guid("999d00d8-37eb-4c40-9801-b093e8637418"),
                             SchoolName = "Нет школы"
                         });
                 });
@@ -302,7 +302,7 @@ namespace KUB.Infrastructure.Migrations
                     b.Property<TimeSpan?>("EndTime")
                         .HasColumnType("time");
 
-                    b.Property<int>("Number")
+                    b.Property<int?>("Number")
                         .HasColumnType("int");
 
                     b.Property<TimeSpan?>("StartTime")
@@ -334,17 +334,17 @@ namespace KUB.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4d3ebcf0-b4b7-45f5-98db-a4121e891372"),
+                            Id = new Guid("89e4433c-587b-4ddd-a79f-e58c3edee594"),
                             Address = "Пушкина0",
                             City = "Томск",
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EndTime = new TimeSpan(0, 0, 0, 0, 0),
                             Number = 0,
                             StartTime = new TimeSpan(0, 0, 0, 0, 0),
-                            TournamentFormatId = new Guid("0875d603-3b26-4fa9-850f-a5d9c7c03c1b"),
-                            TournamentGridId = new Guid("61453fc3-f129-4dd3-9282-e61a56a66e8d"),
+                            TournamentFormatId = new Guid("638d80b6-e2dc-44c5-8e30-9aea41961371"),
+                            TournamentGridId = new Guid("0a2cdc81-9bb5-42ae-9845-4739926a04d0"),
                             TournamentName = "Турнир в Томске0",
-                            TournamentTypeId = new Guid("384df408-f194-4922-8ff4-2abb0a5be368")
+                            TournamentTypeId = new Guid("07a66472-4864-49d4-807b-45caaf1700c9")
                         });
                 });
 
@@ -365,17 +365,17 @@ namespace KUB.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0875d603-3b26-4fa9-850f-a5d9c7c03c1b"),
+                            Id = new Guid("638d80b6-e2dc-44c5-8e30-9aea41961371"),
                             Format = "Оффлайн"
                         },
                         new
                         {
-                            Id = new Guid("6677162d-d01c-48fe-8b0a-724315973bde"),
+                            Id = new Guid("9fb332c4-3da5-4e21-b65a-40141bf16862"),
                             Format = "Онлайн"
                         },
                         new
                         {
-                            Id = new Guid("6fcecfb6-a91a-4e37-8494-8d5ca117a50e"),
+                            Id = new Guid("f2d995eb-e723-4dc7-98fe-4546c89102eb"),
                             Format = "Гибридный"
                         });
                 });
@@ -397,22 +397,22 @@ namespace KUB.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2019b611-9075-4326-bb50-b32d13287a7a"),
+                            Id = new Guid("19101977-e0b6-403b-bbfe-1f9936bd4173"),
                             Type = "Каждый с каждым"
                         },
                         new
                         {
-                            Id = new Guid("2b19f75f-685d-47b8-b12e-d5dacce02bcb"),
+                            Id = new Guid("a6438e73-e452-46ab-896d-0648b026444e"),
                             Type = "Навылет"
                         },
                         new
                         {
-                            Id = new Guid("61453fc3-f129-4dd3-9282-e61a56a66e8d"),
+                            Id = new Guid("0a2cdc81-9bb5-42ae-9845-4739926a04d0"),
                             Type = "По командам"
                         },
                         new
                         {
-                            Id = new Guid("ba19e2be-a89c-4415-9f90-82a61a5f80bd"),
+                            Id = new Guid("2014f0b8-238a-41f4-9675-1b473f4e79eb"),
                             Type = "Комбинированный"
                         });
                 });
@@ -434,27 +434,27 @@ namespace KUB.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("384df408-f194-4922-8ff4-2abb0a5be368"),
+                            Id = new Guid("07a66472-4864-49d4-807b-45caaf1700c9"),
                             Type = "Практикум"
                         },
                         new
                         {
-                            Id = new Guid("67009bb0-3b0e-4c21-a595-47a6caac4566"),
+                            Id = new Guid("93c12f4a-2739-42a4-a792-0c717779f5ec"),
                             Type = "Товарищеский"
                         },
                         new
                         {
-                            Id = new Guid("2c48823c-90cc-4bde-abea-890e33ba21fa"),
+                            Id = new Guid("1e52cfd3-7aa0-4155-8f19-99735b1fa964"),
                             Type = "Именной"
                         },
                         new
                         {
-                            Id = new Guid("9329b1c1-fbcb-460e-8f11-0a45e0fbeba2"),
+                            Id = new Guid("b982ea85-bb43-41d7-ade2-8e2fc8493f17"),
                             Type = "Отборочный"
                         },
                         new
                         {
-                            Id = new Guid("7a1bf0d5-5d9a-44a7-907c-df1ee8198c75"),
+                            Id = new Guid("f31c0d8b-4d69-433b-9d8f-e30e5989a73c"),
                             Type = "Финал года"
                         });
                 });
@@ -511,9 +511,7 @@ namespace KUB.Infrastructure.Migrations
 
                     b.HasOne("KUB.Core.Models.Role", "Role")
                         .WithMany("ParticipantInTournaments")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoleId");
 
                     b.HasOne("KUB.Core.Models.Tournament", "Tournament")
                         .WithMany("ParticipantInTournaments")

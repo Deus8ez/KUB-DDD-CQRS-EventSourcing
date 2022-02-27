@@ -28,6 +28,8 @@ namespace KUB.Core.Interfaces
     {
         Task<ParticipantAndRolesDto> GetByIdAsync(Guid id);
         Task<List<ParticipantAndRolesDto>> GetAllAsync();
+        Task<List<ParticipantAndRolesDto>> GetAllAsyncNotInTournament(Guid tournamentId);
+        Task<List<ParticipantAndRolesDto>> GetAllAsync(Guid tournamentId);
         Task<List<ParticipantAndRolesDto>> GetAllAsync(int offset, int rowNumber);
     }
 

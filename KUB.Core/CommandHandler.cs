@@ -51,6 +51,44 @@ namespace KUB.Core
             await _unitOfWork.SaveAsync();
         }
 
+        public async Task Handle(UpdateTournamentCommand command)
+        {
+            var entity = await _writeRepository.GetEntityByIdAsync<Tournament>(command.Tournament.Id);
+
+            entity.Date = command.Tournament.Date;
+            entity.EndTime = command.Tournament.EndTime;
+            entity.Address = command.Tournament.Address;
+            entity.City = command.Tournament.City;
+            entity.StartTime = command.Tournament.StartTime;
+            entity.TournamentFormatId = command.Tournament.TournamentFormatId;
+            entity.TournamentGridId = command.Tournament.TournamentGridId;
+            entity.TournamentTypeId = command.Tournament.TournamentTypeId;
+            entity.TournamentName = command.Tournament.TournamentName;
+
+            foreach (var item in command.ParticipantsInTournament)
+            {
+                entity.AddParticipant(item);
+            }
+
+            _writeRepository.Update(entity);
+
+            await _eventRepository.AppendEventAsync(command.Event);
+            await _unitOfWork.SaveAsync();
+        }
+
+        public async Task Handle(AddParticipantsCommand command)
+        {
+            var entity = await _writeRepository.InsertAsync<Tournament>(command.Tournament);
+
+            foreach(var item in command.ParticipantsInTournament)
+            {
+                entity.AddParticipant(item);
+            }
+
+            await _eventRepository.AppendEventAsync(command.Event);
+            await _unitOfWork.SaveAsync();
+        }
+
         public async Task Handle(AddParticipantCommand command)
         {
             var participantInTournament = command.ParticipantInTournament;

@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,158 @@ namespace KUB.Infrastructure.Data.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<ParticipantAndRolesDto>> GetAllAsyncNotInTournament(Guid tournamentId)
+        {
+            var connection = ConnectToDb(_connectionString);
+            var items = new ParticipantAndRolesDto();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            using (connection)
+            {
+                SqlCommand command = new SqlCommand
+                                        (
+                                        "select " +
+                                        "Participants.Id, " +
+                                        "Participants.Name, " +
+                                        "Participants.Surname, " +
+                                        "Participants.Patronym, " +
+                                        "Participants.DateOfBirth, " +
+                                        "Participants.ClassicGameRank, " +
+                                        "Participants.BlitzGameRank, " +
+                                        "Participants.CanBeAJury, " +
+                                        "Schools.SchoolName " +
+                                        "from " +
+                                        "Participants " +
+                                        "left outer join ParticipantInTournaments on Participants.Id = ParticipantInTournaments.ParticipantId " +
+                                        "left join ParticipantInSchools on Participants.Id = ParticipantInSchools.ParticipantId " +
+                                        "left join Schools on Schools.Id = ParticipantInSchools.SchoolId " +
+                                        "where ParticipantInTournaments.ParticipantId is null " +
+                                        "union " +
+                                        "select " +
+                                        "Participants.Id, " +
+                                        "Participants.Name, " +
+                                        "Participants.Surname, " +
+                                        "Participants.Patronym, " +
+                                        "Participants.DateOfBirth, " +
+                                        "Participants.ClassicGameRank, " +
+                                        "Participants.BlitzGameRank, " +
+                                        "Participants.CanBeAJury, " +
+                                        "Schools.SchoolName " +
+                                        "from " +
+                                        "Participants " +
+                                        "left outer join ParticipantInTournaments on Participants.Id = ParticipantInTournaments.ParticipantId " +
+                                        "left join ParticipantInSchools on Participants.Id = ParticipantInSchools.ParticipantId " +
+                                        "left join Schools on Schools.Id = ParticipantInSchools.SchoolId " +
+                                        "where ParticipantInTournaments.ParticipantId is null " +
+                                        "and Participants.Id = @tournamentId"
+                                        , connection);
+                command.Parameters.Add("@tournamentId", SqlDbType.UniqueIdentifier);
+                command.Parameters["@tournamentId"].Value = tournamentId;
+                connection.Open();
+                await command.ExecuteNonQueryAsync();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        items.Participants.Add(new ParticipantDto
+                        {
+                            Id = reader.GetGuid(0),
+                            Name = reader.GetString(1),
+                            Surname = reader.GetString(2),
+                            Patronym = reader.GetString(3),
+                            DateOfBirth = reader.GetDateTime(4),
+                            ClassicGameRank = reader.IsDBNull(5) ? null : reader.GetInt32(5),
+                            BlitzGameRank = reader.IsDBNull(6) ? null : reader.GetInt32(6),
+                            CanBeAJury = reader.GetBoolean(7),
+                            SchoolName = reader.IsDBNull(8) ? null : reader.GetString(8),
+                        });
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No rows found.");
+                }
+            }
+
+            var result = new List<ParticipantAndRolesDto>();
+            result.Add(items);
+            Console.WriteLine("sending roles");
+            return result;
+        }
+
+        public async Task<List<ParticipantAndRolesDto>> GetAllAsync(Guid tournamentId)
+        {
+            var connection = ConnectToDb(_connectionString);
+            var items = new ParticipantAndRolesDto();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            using (connection)
+            {
+                SqlCommand command = new SqlCommand(
+                            "select " +
+                            "Participants.Id, " +
+                            "Participants.Name, " +
+                            "Participants.Surname, " +
+                            "Participants.Patronym, " +
+                            "Participants.DateOfBirth, " +
+                            "Participants.ClassicGameRank, " +
+                            "Participants.BlitzGameRank, " +
+                            "Participants.CanBeAJury, " +
+                            "Schools.SchoolName " +
+                            "from " +
+                            "Participants " +
+                            "inner join ParticipantInTournaments on Participants.Id = ParticipantInTournaments.ParticipantId " +
+                            "left join ParticipantInSchools on Participants.Id = ParticipantInSchools.ParticipantId " +
+                            "left join Schools on Schools.Id = ParticipantInSchools.SchoolId " +
+                            "where ParticipantInTournaments.TournamentId = @tournamentId",
+                  connection);
+                command.Parameters.Add("@tournamentId", SqlDbType.UniqueIdentifier);
+                command.Parameters["@tournamentId"].Value = tournamentId;
+                connection.Open();
+
+                await command.ExecuteNonQueryAsync();
+
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        items.Participants.Add(new ParticipantDto
+                        {
+                            Id = reader.GetGuid(0),
+                            Name = reader.GetString(1),
+                            Surname = reader.GetString(2),
+                            Patronym = reader.GetString(3),
+                            DateOfBirth = reader.GetDateTime(4),
+                            ClassicGameRank = reader.IsDBNull(5) ? null : reader.GetInt32(5),
+                            BlitzGameRank = reader.IsDBNull(6) ? null : reader.GetInt32(6),
+                            CanBeAJury = reader.GetBoolean(7),
+                            SchoolName = reader.IsDBNull(8) ? null : reader.GetString(8),
+                            IsInTournament = true,
+                        });
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No rows found.");
+                }
+                reader.Close();
+                
+                stopWatch.Stop();
+                Console.WriteLine("raw" + stopWatch.Elapsed.Milliseconds.ToString());
+                reader.Close();
+            }
+
+            var result = new List<ParticipantAndRolesDto>();
+            result.Add(items);
+            Console.WriteLine("sending roles");
+            return result;
+        }
+
 
         public async Task<List<ParticipantAndRolesDto>> GetAllAsync()
         {
@@ -108,6 +261,7 @@ namespace KUB.Infrastructure.Data.Repositories
 
             var result = new List<ParticipantAndRolesDto>();
             result.Add(items);
+            Console.WriteLine("sending roles");
             return result;
         }
 

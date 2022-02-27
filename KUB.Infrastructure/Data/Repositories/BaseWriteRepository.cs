@@ -33,11 +33,12 @@ namespace KUB.Infrastructure.Data.Repositories
             return item;
         }
 
-        public async Task InsertAsync<T>(T obj)
+        public async Task<T> InsertAsync<T>(T obj)
             where T : class
         {
             DbSet<T> table = _context.Set<T>();
             await table.AddAsync(obj);
+            return obj;
         }
 
         public void Update<T>(T obj)

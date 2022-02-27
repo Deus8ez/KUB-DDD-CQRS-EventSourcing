@@ -12,8 +12,9 @@ namespace KUB.Core.Commands
     {
         public Guid AggregateId { get; set; }
 
-        public DeleteCommand(Guid AggregateId, string commandName)
+        public DeleteCommand(Guid id, string commandName)
         {
+            AggregateId = id;
             Event = new BaseEvent();
             Event.SetEvent(AggregateId, commandName, AggregateId);
         }
