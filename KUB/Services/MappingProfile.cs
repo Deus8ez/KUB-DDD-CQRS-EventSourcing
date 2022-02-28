@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using KUB.Core.Models;
+using KUB.SharedKernel.DTOModels.Participant.Requests;
+using KUB.SharedKernel.DTOModels.School.Requests;
 using KUB.SharedKernel.DTOModels.Tournament;
 using KUB.SharedKernel.DTOModels.Tournament.Requests;
 
@@ -15,7 +17,9 @@ namespace KUB.Web.Services
             CreateMap<ParticipantRegistrationPostRequest, ParticipantInTournament>();
             CreateMap<ParticipantInTournamentDeletionRequest, ParticipantInTournament>();
             CreateMap<TournamentDto, Tournament>();
-            
+            CreateMap<SchoolPostRequest, School>();
+            CreateMap<ParticipantPostRequest, Participant>();
+            CreateMap<ParticipantInTournamentsPostRequest, ParticipantInTournament>();
         }
     }
 }

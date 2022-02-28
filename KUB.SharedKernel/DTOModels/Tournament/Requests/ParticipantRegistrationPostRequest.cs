@@ -12,6 +12,12 @@ namespace KUB.SharedKernel.DTOModels.Tournament.Requests
         public Guid? RoleId { get; set; }
     }
 
+    public class ParticipantInTournamentsPostRequest
+    {
+        public Guid TournamentId { get; set; }
+        public Guid? RoleId { get; set; }
+    }
+
     public class ParticipantInTournamentDeletionRequest
     {
         //public Guid Id { get; set; }

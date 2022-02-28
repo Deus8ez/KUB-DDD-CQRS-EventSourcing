@@ -37,6 +37,11 @@ namespace KUB.Core
             return result;
         }
 
+        public async Task RegisterParticipant(Participant participant, List<ParticipantInTournament> participantInTournaments)
+        {
+            await _commandHandler.Handle(new RegisterParticipantWithTournamentsCommand(participant, participantInTournaments));
+        }
+
         public async Task UpdateTournament(Tournament tournament, List<ParticipantInTournament> participantInTournaments)
         {
             await _commandHandler.Handle(new UpdateTournamentCommand(tournament, participantInTournaments));

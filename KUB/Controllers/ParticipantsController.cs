@@ -19,12 +19,35 @@ namespace KUB.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ParticipantsController : BaseController<Participant, ParticipantAndRolesDto, ParticipantPostRequest>
+    public class ParticipantsController : BaseController<Participant, ParticipantAndRolesDto, ParticipantWithTournamentsRegistrationPostRequest>
     {
         IParticipantReadRepository _readRepository;
+        IParticipantService _participantService;
+        IMapper _mapper;
         public ParticipantsController(IParticipantService service, IMapper mapper, IParticipantReadRepository readRepository) : base(service, mapper, readRepository)
         {
+            _participantService = service;
             _readRepository = readRepository;
+            _mapper = mapper;
+        }
+
+        [HttpPost]
+        public override async Task<IActionResult> Post(ParticipantWithTournamentsRegistrationPostRequest request)
+        {
+            var participant = _mapper.Map<Participant>(request.Participant);
+            var participantInTournaments = new List<ParticipantInTournament>();
+
+            if (request.ParticipantInTournaments != null && request.ParticipantInTournaments.Any())
+            {
+                foreach (var item in request.ParticipantInTournaments)
+                {
+                    participantInTournaments.Add(_mapper.Map<ParticipantInTournament>(item));
+                }
+            }
+
+            await _participantService.RegisterParticipant(participant, participantInTournaments);
+
+            return Ok();
         }
 
         [HttpGet]

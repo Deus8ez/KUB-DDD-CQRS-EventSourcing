@@ -31,11 +31,6 @@ namespace KUB.Core.Models
             ParticipantInTournaments.Add(participantInTournament);
         }
 
-        public void ClearParticipants()
-        {
-            ParticipantInTournaments.Clear();
-        }
-
         public void RemoveParticipant(ParticipantInTournament participantInTournament)
         {
             foreach(var participant in ParticipantInTournaments)

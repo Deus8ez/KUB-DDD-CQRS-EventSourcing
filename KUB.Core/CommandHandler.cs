@@ -106,5 +106,18 @@ namespace KUB.Core
             await _eventRepository.AppendEventAsync(command.Event);
             await _unitOfWork.SaveAsync();
         }
+
+        public async Task Handle(RegisterParticipantWithTournamentsCommand command)
+        {
+            var tournament = await _writeRepository.InsertAsync(command.Participant);
+
+            foreach(var item in command.ParticipantsInTournament)
+            {
+                tournament.AddToTournament(item);
+            }
+
+            await _writeRepository.InsertAsync(tournament);
+            await _unitOfWork.SaveAsync();
+        }
     }
 }
