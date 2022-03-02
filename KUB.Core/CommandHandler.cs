@@ -46,7 +46,7 @@ namespace KUB.Core
         public async Task Handle<T>(DeleteCommand<T> command)
             where T : BaseEntity, new()
         {
-            await _writeRepository.Delete<Tournament>(command.AggregateId);
+            await _writeRepository.Delete<T>(command.AggregateId);
             await _eventRepository.AppendEventAsync(command.Event);
             await _unitOfWork.SaveAsync();
         }

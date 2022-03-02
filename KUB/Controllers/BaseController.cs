@@ -104,8 +104,9 @@ namespace KUB.Web.Controllers
             try
             {
                 await _service.DeleteAsync<TEntity>(id);
-            } catch
+            } catch (Exception e)
             {
+                Console.WriteLine(e);
                 return StatusCode(500);
             }
 

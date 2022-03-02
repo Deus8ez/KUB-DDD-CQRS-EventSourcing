@@ -127,12 +127,14 @@ namespace KUB.Infrastructure.Data.Repositories
                             "Participants.ClassicGameRank, " +
                             "Participants.BlitzGameRank, " +
                             "Participants.CanBeAJury, " +
-                            "Schools.SchoolName " +
+                            "Schools.SchoolName, " +
+                            "Roles.RoleName " +
                             "from " +
                             "Participants " +
                             "inner join ParticipantInTournaments on Participants.Id = ParticipantInTournaments.ParticipantId " +
                             "left join ParticipantInSchools on Participants.Id = ParticipantInSchools.ParticipantId " +
                             "left join Schools on Schools.Id = ParticipantInSchools.SchoolId " +
+                            "inner join Roles on ParticipantInTournaments.RoleId = Roles.Id " +
                             "where ParticipantInTournaments.TournamentId = @tournamentId",
                   connection);
                 command.Parameters.Add("@tournamentId", SqlDbType.UniqueIdentifier);
@@ -156,7 +158,8 @@ namespace KUB.Infrastructure.Data.Repositories
                             ClassicGameRank = reader.IsDBNull(5) ? null : reader.GetInt32(5),
                             BlitzGameRank = reader.IsDBNull(6) ? null : reader.GetInt32(6),
                             CanBeAJury = reader.GetBoolean(7),
-                            SchoolName = reader.IsDBNull(8) ? null : reader.GetString(8),
+                            SchoolName = reader.IsDBNull(8) ? "Не выбрана" : reader.GetString(8),
+                            RoleName = reader.IsDBNull(9) ? "Не выбрана" : reader.GetString(9),
                             IsInTournament = true,
                         });
                     }

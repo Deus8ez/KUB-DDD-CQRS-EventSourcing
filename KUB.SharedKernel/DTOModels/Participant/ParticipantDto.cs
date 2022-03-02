@@ -24,6 +24,7 @@ namespace KUB.SharedKernel.DTOModels.Participant
         public int? BlitzGameRank { get; set; }
         public bool CanBeAJury { get; set; }
         public string SchoolName { get; set; }
+        public string RoleName { get; set; }
         public bool? IsInTournament { get; set; } = false;
 
     }

@@ -26,3 +26,5 @@ namespace KUB.SharedKernel.DTOModels.Participant.Requests
         public Guid SchoolId { get; set; }
     }
 }
+
+
