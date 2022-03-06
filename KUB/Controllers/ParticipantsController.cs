@@ -19,7 +19,7 @@ namespace KUB.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ParticipantsController : BaseController<Participant, ParticipantAndRolesDto, ParticipantWithTournamentsRegistrationPostRequest>
+    public class ParticipantsController : BaseController<Participant, ParticipantAndRolesDto, ParticipantPostRequest>
     {
         IParticipantReadRepository _readRepository;
         IParticipantService _participantService;
@@ -32,22 +32,31 @@ namespace KUB.Web.Controllers
         }
 
         [HttpPost]
-        public override async Task<IActionResult> Post(ParticipantWithTournamentsRegistrationPostRequest request)
+        public override async Task<IActionResult> Post(ParticipantPostRequest request)
         {
-            var participant = _mapper.Map<Participant>(request.Participant);
-            var participantInTournaments = new List<ParticipantInTournament>();
+            var participant = _mapper.Map<Participant>(request);
 
-            if (request.ParticipantInTournaments != null && request.ParticipantInTournaments.Any())
-            {
-                foreach (var item in request.ParticipantInTournaments)
-                {
-                    participantInTournaments.Add(_mapper.Map<ParticipantInTournament>(item));
-                }
-            }
-
-            await _participantService.RegisterParticipant(participant, participantInTournaments);
+            await _participantService.RegisterParticipant(participant, request.SchoolId);
 
             return Ok();
+        }
+
+        [HttpPut]
+        [Route("{id:guid}")]
+        public override async Task<IActionResult> Put(Guid id, ParticipantPostRequest request)
+        {
+            var entity = _mapper.Map<Participant>(request);
+            entity.Id = id;
+            try
+            {
+                await _participantService.UpdateParticipant(entity, id);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500);
+            }
+
+            return NoContent();
         }
 
         [HttpGet]

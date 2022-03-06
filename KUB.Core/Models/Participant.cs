@@ -20,10 +20,17 @@ namespace KUB.Core.Models
         public virtual ICollection<JuryInPanel> JuryInPanels { get; set; }
         public virtual ICollection<ParticipantInTournament> ParticipantInTournaments { get; set; }
 
-        public void AddToTournament(ParticipantInTournament participantInTournament)
+        public void AddToSchool(Guid? schoolId)
         {
-            ParticipantInTournaments = new Collection<ParticipantInTournament>();
-            ParticipantInTournaments.Add(participantInTournament);
+            if(schoolId != null)
+            {
+                ParticipantInSchool = new ParticipantInSchool
+                {
+                    SchoolId = schoolId,
+                    Id = Guid.NewGuid(),
+                    ParticipantId = this.Id
+                };
+            }
         }
 
         public void RemoveFromTournament(ParticipantInTournament participantInTournament)

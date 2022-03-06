@@ -70,7 +70,7 @@ namespace KUB.Web.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
-        public override async Task<IActionResult> Update(Guid id, TournamentRegistrationPostRequest participantRegistrationPostRequest)
+        public override async Task<IActionResult> Put(Guid id, TournamentRegistrationPostRequest participantRegistrationPostRequest)
         {
             List<ParticipantInTournament> participantInTournaments = new List<ParticipantInTournament>();
             var tournament = _mapper.Map<Tournament>(participantRegistrationPostRequest.Tournament);

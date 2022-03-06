@@ -35,6 +35,7 @@ namespace KUB.Core.Interfaces
 
     public interface IParticipantService : IService
     {
-        Task RegisterParticipant(Participant participant, List<ParticipantInTournament> participantInTournaments);
+        Task RegisterParticipant(Participant participant, Guid? schoolId);
+        Task UpdateParticipant(Participant participant, Guid? schoolId);
     }
 }

@@ -83,7 +83,7 @@ namespace KUB.Web.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
-        public virtual async Task<IActionResult> Update(Guid id, TRequest data)
+        public virtual async Task<IActionResult> Put(Guid id, TRequest data)
         {
             var entity = _mapper.Map<TEntity>(data);
             entity.Id = id; 

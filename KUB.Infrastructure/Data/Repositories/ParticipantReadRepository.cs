@@ -100,6 +100,33 @@ namespace KUB.Infrastructure.Data.Repositories
                 {
                     Console.WriteLine("No rows found.");
                 }
+                reader.Close();
+
+                command.CommandText = "select " +
+                                        "id, " +
+                                        "roleName " +
+                                        "from " +
+                                        "roles ";
+
+                await command.ExecuteNonQueryAsync();
+                reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        items.Roles.Add(new RoleDto
+                        {
+                            Id = reader.GetGuid(0),
+                            RoleName = reader.GetString(1),
+                        });
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No rows found.");
+                }
+                reader.Close();
+
             }
 
             var result = new List<ParticipantAndRolesDto>();

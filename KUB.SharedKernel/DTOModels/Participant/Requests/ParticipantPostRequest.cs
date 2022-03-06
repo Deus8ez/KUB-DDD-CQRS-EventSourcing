@@ -23,7 +23,7 @@ namespace KUB.SharedKernel.DTOModels.Participant.Requests
         public int? ClassicGameRank { get; set; }
         public int? BlitzGameRank { get; set; }
         public bool CanBeAJury { get; set; }
-        public Guid SchoolId { get; set; }
+        public Guid? SchoolId { get; set; }
     }
 }
 

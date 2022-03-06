@@ -28,6 +28,7 @@ namespace KUB.Core.Interfaces
         Task Handle(AddParticipantCommand command);
         Task Handle(RemoveParticipantCommand command);
         Task Handle(UpdateTournamentCommand command);
-        Task Handle(RegisterParticipantWithTournamentsCommand command);
+        Task Handle(RegisterParticipant command);
+        Task Handle(UpdateParticipant command);
     }
 }

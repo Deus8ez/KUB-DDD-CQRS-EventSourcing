@@ -23,11 +23,10 @@ namespace KUB.Core.Models
         public string Address { get; set; }
         public int? Number { get; set; }
         public virtual ICollection<JuryInPanel> JuryInPanels { get; set; }
-        public virtual ICollection<ParticipantInTournament> ParticipantInTournaments { get; set; }
+        public virtual ICollection<ParticipantInTournament> ParticipantInTournaments { get; set; } = new Collection<ParticipantInTournament>();
 
         public void AddParticipant(ParticipantInTournament participantInTournament)
         {
-            ParticipantInTournaments = new Collection<ParticipantInTournament>();
             ParticipantInTournaments.Add(participantInTournament);
         }
 

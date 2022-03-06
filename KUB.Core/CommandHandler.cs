@@ -107,16 +107,30 @@ namespace KUB.Core
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task Handle(RegisterParticipantWithTournamentsCommand command)
+        public async Task Handle(RegisterParticipant command)
         {
-            var tournament = await _writeRepository.InsertAsync(command.Participant);
+            command.Participant.AddToSchool(command.SchoolId);
+            await _writeRepository.InsertAsync(command.Participant);
+            await _unitOfWork.SaveAsync();
+        }
 
-            foreach(var item in command.ParticipantsInTournament)
-            {
-                tournament.AddToTournament(item);
-            }
+        public async Task Handle(UpdateParticipant command)
+        {
+            var participant = command.Participant;
+            var entity = await _writeRepository.GetEntityByIdAsync<Participant>(participant.Id);
 
-            await _writeRepository.InsertAsync(tournament);
+            entity.CanBeAJury = participant.CanBeAJury;
+            entity.BlitzGameRank = participant.BlitzGameRank;
+            entity.ClassicGameRank = participant.ClassicGameRank;
+            entity.DateOfBirth = participant.DateOfBirth;
+            entity.Name = participant.Name;
+            entity.Patronym = participant.Patronym;
+            entity.Surname = participant.Surname;
+            entity.ParticipantInSchool.SchoolId = command.SchoolId;
+
+            _writeRepository.Update(entity);
+
+            await _eventRepository.AppendEventAsync(command.Event);
             await _unitOfWork.SaveAsync();
         }
     }
