@@ -22,6 +22,7 @@ using KUB.Web.ViewModels;
 
 namespace KUB.Web.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TournamentsController : BaseController<Tournament, TournamentDto, TournamentRegistrationPostRequest>

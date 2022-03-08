@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace KUB.SharedKernel.DTOModels
 {
-    public class OperationStatus
-    { 
-        public bool Success { get; set; }
-        public string Message { get; set; }
+    public class UserData
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using KUB.Core.Models;
 using KUB.SharedKernel.CQRS.Interfaces;
 using KUB.SharedKernel.DTOModels.Tournament;
 using KUB.SharedKernel.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace KUB.Web.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public abstract class BaseController<TEntity, TEntityDto, TRequest> : ControllerBase

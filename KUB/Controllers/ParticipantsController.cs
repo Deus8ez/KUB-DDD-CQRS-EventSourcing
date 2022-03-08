@@ -14,9 +14,11 @@ using KUB.SharedKernel.Interfaces;
 using KUB.SharedKernel.DTOModels.Participant;
 using KUB.Core.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KUB.Web.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ParticipantsController : BaseController<Participant, ParticipantAndRolesDto, ParticipantPostRequest>
