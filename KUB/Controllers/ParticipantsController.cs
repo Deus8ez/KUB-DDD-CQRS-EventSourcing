@@ -49,7 +49,7 @@ namespace KUB.Web.Controllers
             entity.Id = id;
             try
             {
-                await _participantService.UpdateParticipant(entity, id);
+                await _participantService.UpdateParticipant(entity, request.SchoolId);
             }
             catch (Exception ex)
             {

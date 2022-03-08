@@ -117,7 +117,9 @@ namespace KUB.Core
         public async Task Handle(UpdateParticipant command)
         {
             var participant = command.Participant;
-            var entity = await _writeRepository.GetEntityByIdAsync<Participant>(participant.Id);
+            var participantInSchoolEntity = await _writeRepository.GetEntityByAnyAsync<ParticipantInSchool>("ParticipantId", participant.Id);
+            var entity = await _writeRepository.GetEntityByAnyAsync<Participant>("Id", participant.Id);
+
 
             entity.CanBeAJury = participant.CanBeAJury;
             entity.BlitzGameRank = participant.BlitzGameRank;

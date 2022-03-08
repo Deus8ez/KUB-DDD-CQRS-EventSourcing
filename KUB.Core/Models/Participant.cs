@@ -16,7 +16,7 @@ namespace KUB.Core.Models
         public int? ClassicGameRank { get; set; }
         public int? BlitzGameRank { get; set; }
         public bool CanBeAJury { get; set; }
-        public virtual ParticipantInSchool ParticipantInSchool { get; set; }
+        public ParticipantInSchool ParticipantInSchool { get; set; }
         public virtual ICollection<JuryInPanel> JuryInPanels { get; set; }
         public virtual ICollection<ParticipantInTournament> ParticipantInTournaments { get; set; }
 

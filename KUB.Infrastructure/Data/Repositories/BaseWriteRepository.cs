@@ -33,6 +33,18 @@ namespace KUB.Infrastructure.Data.Repositories
             return item;
         }
 
+        public async Task<T> GetEntityByAnyAsync<T>(string property, object value)
+            where T : BaseEntity, new()
+        {
+            DbSet<T> table = _context.Set<T>();
+
+            IQueryable<T> query = table;
+
+            query = query.Where(e => e[property].Equals(value));
+
+            return await query.FirstAsync();
+        }
+
         public async Task<T> InsertAsync<T>(T obj)
             where T : class
         {
@@ -48,7 +60,7 @@ namespace KUB.Infrastructure.Data.Repositories
 
             table.Attach(obj);
             _context.Entry(obj).State = EntityState.Modified;
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public async Task<Tournament> GetTournamentWithParticipants(Guid id)

@@ -6,9 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KUB.Core.Models
 {
-    public partial class ParticipantInSchool
+    public partial class ParticipantInSchool : BaseEntity
     {
-        public Guid Id { get; set; }
         public Guid ParticipantId { get; set; }
         public Guid? SchoolId { get; set; }
         public virtual Participant Participant { get; set; }
