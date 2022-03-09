@@ -38,40 +38,39 @@ namespace KUB.Infrastructure.Data.Repositories
             {
                 SqlCommand command = new SqlCommand
                                         (
-                                        "select " +
-                                        "Participants.Id, " +
-                                        "Participants.Name, " +
-                                        "Participants.Surname, " +
-                                        "Participants.Patronym, " +
-                                        "Participants.DateOfBirth, " +
-                                        "Participants.ClassicGameRank, " +
-                                        "Participants.BlitzGameRank, " +
-                                        "Participants.CanBeAJury, " +
-                                        "Schools.SchoolName " +
-                                        "from " +
-                                        "Participants " +
-                                        "left outer join ParticipantInTournaments on Participants.Id = ParticipantInTournaments.ParticipantId " +
-                                        "left join ParticipantInSchools on Participants.Id = ParticipantInSchools.ParticipantId " +
-                                        "left join Schools on Schools.Id = ParticipantInSchools.SchoolId " +
-                                        "where ParticipantInTournaments.ParticipantId is null " +
-                                        "union " +
-                                        "select " +
-                                        "Participants.Id, " +
-                                        "Participants.Name, " +
-                                        "Participants.Surname, " +
-                                        "Participants.Patronym, " +
-                                        "Participants.DateOfBirth, " +
-                                        "Participants.ClassicGameRank, " +
-                                        "Participants.BlitzGameRank, " +
-                                        "Participants.CanBeAJury, " +
-                                        "Schools.SchoolName " +
-                                        "from " +
-                                        "Participants " +
-                                        "left outer join ParticipantInTournaments on Participants.Id = ParticipantInTournaments.ParticipantId " +
-                                        "left join ParticipantInSchools on Participants.Id = ParticipantInSchools.ParticipantId " +
-                                        "left join Schools on Schools.Id = ParticipantInSchools.SchoolId " +
-                                        "where ParticipantInTournaments.ParticipantId is null " +
-                                        "and Participants.Id = @tournamentId"
+                                            "select " +
+                                            "Participants.Id, " +
+                                            "Participants.Name, " +
+                                            "Participants.Surname, " +
+                                            "Participants.Patronym, " +
+                                            "Participants.DateOfBirth, " +
+                                            "Participants.ClassicGameRank, " +
+                                            "Participants.BlitzGameRank, " +
+                                            "Participants.CanBeAJury, " +
+                                            "Schools.SchoolName " +
+                                            "from " +
+                                            "Participants " +
+                                            "left join ParticipantInTournaments on Participants.Id = ParticipantInTournaments.ParticipantId " +
+                                            "left join ParticipantInSchools on Participants.Id = ParticipantInSchools.ParticipantId " +
+                                            "left join Schools on Schools.Id = ParticipantInSchools.SchoolId " +
+                                            "where ParticipantInTournaments.ParticipantId is null " +
+                                            "union " +
+                                            "select " +
+                                            "Participants.Id, " +
+                                            "Participants.Name, " +
+                                            "Participants.Surname, " +
+                                            "Participants.Patronym, " +
+                                            "Participants.DateOfBirth, " +
+                                            "Participants.ClassicGameRank, " +
+                                            "Participants.BlitzGameRank, " +
+                                            "Participants.CanBeAJury, " +
+                                            "Schools.SchoolName " +
+                                            "from " +
+                                            "Participants " +
+                                            "left join ParticipantInTournaments on Participants.Id = ParticipantInTournaments.ParticipantId " +
+                                            "left join ParticipantInSchools on Participants.Id = ParticipantInSchools.ParticipantId " +
+                                            "left join Schools on Schools.Id = ParticipantInSchools.SchoolId " +
+                                            "where ParticipantInTournaments.TournamentId != @tournamentId"
                                         , connection);
                 command.Parameters.Add("@tournamentId", SqlDbType.UniqueIdentifier);
                 command.Parameters["@tournamentId"].Value = tournamentId;

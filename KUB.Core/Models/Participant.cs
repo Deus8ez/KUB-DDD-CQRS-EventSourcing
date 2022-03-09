@@ -11,7 +11,7 @@ namespace KUB.Core.Models
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Patronym { get; set; }
+        public string? Patronym { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int? ClassicGameRank { get; set; }
         public int? BlitzGameRank { get; set; }

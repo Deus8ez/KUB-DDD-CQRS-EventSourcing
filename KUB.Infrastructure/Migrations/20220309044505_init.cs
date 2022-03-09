@@ -43,7 +43,7 @@ namespace KUB.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Patronym = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Patronym = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ClassicGameRank = table.Column<int>(type: "int", nullable: true),
                     BlitzGameRank = table.Column<int>(type: "int", nullable: true),
@@ -244,44 +244,44 @@ namespace KUB.Infrastructure.Migrations
                 columns: new[] { "Id", "Panel" },
                 values: new object[,]
                 {
-                    { new Guid("09b5071a-007f-4c00-bec7-35d0e7ac322a"), "Направляющие на переговоры" },
-                    { new Guid("35260ea7-f8c0-4dc9-b5db-5eb1c3f6f9fd"), "Нанимающиеся на работу" },
-                    { new Guid("7e96ada8-98ec-42bc-92bf-c7fa450008d3"), "Направляющие на переговоры" }
+                    { new Guid("98b10d3d-2ea4-4624-b645-ae81bd933c5b"), "Направляющие на переговоры" },
+                    { new Guid("b85ffe2a-e024-4875-aedb-ed36be8e64e0"), "Нанимающиеся на работу" },
+                    { new Guid("f1ba7178-3372-45fe-82e1-88596b44b4eb"), "Направляющие на переговоры" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Participants",
                 columns: new[] { "Id", "BlitzGameRank", "CanBeAJury", "ClassicGameRank", "DateOfBirth", "Name", "Patronym", "Surname" },
-                values: new object[] { new Guid("18bd477b-ca58-4043-a604-97f982af5adb"), 1, true, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Иван", "Иванович", "Иванов" });
+                values: new object[] { new Guid("3cb31029-2272-4956-8eb4-ec76d043c7d8"), 1, true, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Иван", "Иванович", "Иванов" });
 
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "RoleName" },
                 values: new object[,]
                 {
-                    { new Guid("34af7e1d-650e-442c-b3be-7009cc663452"), "Судья" },
-                    { new Guid("3ad11b96-7179-4b1b-b952-d424baa65063"), "Зритель" },
-                    { new Guid("8a26c2d5-732d-4f86-949a-ccd1dadc008c"), "Арбитр" },
-                    { new Guid("995eddbf-f325-4d2d-aac1-0c50a6f2fdda"), "Игрок" },
-                    { new Guid("aca33ae0-fa95-4646-a1e6-109e083bb004"), "Секретарь" },
-                    { new Guid("b932ba3e-db64-46c3-a9c6-b670e3c6bfb4"), "Не выбрана" },
-                    { new Guid("db4aa28c-8972-4fe7-8e8e-23a834da51ed"), "Секундант" },
-                    { new Guid("ea0d205d-cb52-4ce3-a5e5-4268aabc96e1"), "Тренер" }
+                    { new Guid("5309134e-7eb1-4af1-a02b-f5544258d9d8"), "Секундант" },
+                    { new Guid("536b40bb-5e6c-40fb-82c9-57422b7b0a7a"), "Судья" },
+                    { new Guid("8d6c9521-3ee1-43d2-9a08-55b64ee9c83d"), "Секретарь" },
+                    { new Guid("be42f885-8d02-49d4-a27f-c3bbf6dcf056"), "Арбитр" },
+                    { new Guid("d1f1cccf-ef20-414c-ab65-8091e5b9932a"), "Тренер" },
+                    { new Guid("d4613ff2-a5cb-474c-abcd-4378c95517b2"), "Не выбрана" },
+                    { new Guid("dab9a690-19e1-4b6e-b440-d553a0bba5bc"), "Игрок" },
+                    { new Guid("dcb4b5af-471c-470c-aa20-5f719ec249cf"), "Зритель" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Schools",
                 columns: new[] { "Id", "SchoolName" },
-                values: new object[] { new Guid("999d00d8-37eb-4c40-9801-b093e8637418"), "Нет школы" });
+                values: new object[] { new Guid("69fae499-b8b9-45b5-9090-64f2ba1b8f1f"), "Нет школы" });
 
             migrationBuilder.InsertData(
                 table: "TournamentFormats",
                 columns: new[] { "Id", "Format" },
                 values: new object[,]
                 {
-                    { new Guid("638d80b6-e2dc-44c5-8e30-9aea41961371"), "Оффлайн" },
-                    { new Guid("9fb332c4-3da5-4e21-b65a-40141bf16862"), "Онлайн" },
-                    { new Guid("f2d995eb-e723-4dc7-98fe-4546c89102eb"), "Гибридный" }
+                    { new Guid("33592ac7-4262-4f64-b382-26776320cc65"), "Онлайн" },
+                    { new Guid("7a46d039-8512-4391-9d84-d82051c15dd3"), "Гибридный" },
+                    { new Guid("d5b75fdf-0b96-42e8-8bde-63a55f0ce84d"), "Оффлайн" }
                 });
 
             migrationBuilder.InsertData(
@@ -289,10 +289,10 @@ namespace KUB.Infrastructure.Migrations
                 columns: new[] { "Id", "Type" },
                 values: new object[,]
                 {
-                    { new Guid("0a2cdc81-9bb5-42ae-9845-4739926a04d0"), "По командам" },
-                    { new Guid("19101977-e0b6-403b-bbfe-1f9936bd4173"), "Каждый с каждым" },
-                    { new Guid("2014f0b8-238a-41f4-9675-1b473f4e79eb"), "Комбинированный" },
-                    { new Guid("a6438e73-e452-46ab-896d-0648b026444e"), "Навылет" }
+                    { new Guid("53ed7ad6-d4a8-437d-90a7-00d6a837fab6"), "Комбинированный" },
+                    { new Guid("8a09b011-3f5d-4ee3-90e3-860c1e00c69c"), "По командам" },
+                    { new Guid("9c793506-6347-4bc6-982a-ab7a582ea233"), "Каждый с каждым" },
+                    { new Guid("e66f3524-3b18-4fec-aa02-85eefcd8ad8d"), "Навылет" }
                 });
 
             migrationBuilder.InsertData(
@@ -300,17 +300,17 @@ namespace KUB.Infrastructure.Migrations
                 columns: new[] { "Id", "Type" },
                 values: new object[,]
                 {
-                    { new Guid("07a66472-4864-49d4-807b-45caaf1700c9"), "Практикум" },
-                    { new Guid("1e52cfd3-7aa0-4155-8f19-99735b1fa964"), "Именной" },
-                    { new Guid("93c12f4a-2739-42a4-a792-0c717779f5ec"), "Товарищеский" },
-                    { new Guid("b982ea85-bb43-41d7-ade2-8e2fc8493f17"), "Отборочный" },
-                    { new Guid("f31c0d8b-4d69-433b-9d8f-e30e5989a73c"), "Финал года" }
+                    { new Guid("05b6c671-26fa-4351-a6fd-05324fc73647"), "Именной" },
+                    { new Guid("45f5d608-30bf-4cd3-859b-fe270d48dfe9"), "Финал года" },
+                    { new Guid("755a1272-5ca4-4ab0-acdd-6b7d19aed898"), "Товарищеский" },
+                    { new Guid("dfbd568d-4a8f-417d-bd92-008cbcff3ca8"), "Отборочный" },
+                    { new Guid("e87ca25b-e2d2-4c2a-8703-bed7fee08dd6"), "Практикум" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Tournaments",
                 columns: new[] { "Id", "Address", "City", "Date", "EndTime", "Number", "StartTime", "TournamentFormatId", "TournamentGridId", "TournamentName", "TournamentTypeId" },
-                values: new object[] { new Guid("89e4433c-587b-4ddd-a79f-e58c3edee594"), "Пушкина0", "Томск", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0), 0, new TimeSpan(0, 0, 0, 0, 0), new Guid("638d80b6-e2dc-44c5-8e30-9aea41961371"), new Guid("0a2cdc81-9bb5-42ae-9845-4739926a04d0"), "Турнир в Томске0", new Guid("07a66472-4864-49d4-807b-45caaf1700c9") });
+                values: new object[] { new Guid("7ba58061-2d36-4b64-acab-c511bd6ca120"), "Пушкина0", "Томск", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0), 0, new TimeSpan(0, 0, 0, 0, 0), new Guid("d5b75fdf-0b96-42e8-8bde-63a55f0ce84d"), new Guid("8a09b011-3f5d-4ee3-90e3-860c1e00c69c"), "Турнир в Томске0", new Guid("e87ca25b-e2d2-4c2a-8703-bed7fee08dd6") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_JuryInPanels_JuryPanelId",
