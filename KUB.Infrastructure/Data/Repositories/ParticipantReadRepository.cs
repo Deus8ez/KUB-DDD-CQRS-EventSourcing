@@ -67,11 +67,15 @@ namespace KUB.Infrastructure.Data.Repositories
                                             "Schools.SchoolName " +
                                             "from " +
                                             "Participants " +
-                                            "left join ParticipantInTournaments on Participants.Id = ParticipantInTournaments.ParticipantId " +
                                             "left join ParticipantInSchools on Participants.Id = ParticipantInSchools.ParticipantId " +
                                             "left join Schools on Schools.Id = ParticipantInSchools.SchoolId " +
-                                            "where ParticipantInTournaments.TournamentId != @tournamentId"
-                                        , connection);
+                                            "left join ParticipantInTournaments on Participants.Id = ParticipantInTournaments.ParticipantId " +
+                                            "where ParticipantInTournaments.TournamentId != @tournamentId " +
+                                            "and Participants.Id not in " +
+                                            "(select ParticipantInTournaments.ParticipantId " +
+                                            "from ParticipantInTournaments " +
+                                            "where ParticipantInTournaments.TournamentId = @tournamentId" +
+                                            ") ", connection);
                 command.Parameters.Add("@tournamentId", SqlDbType.UniqueIdentifier);
                 command.Parameters["@tournamentId"].Value = tournamentId;
                 connection.Open();

@@ -42,7 +42,11 @@ namespace KUB.Web.Controllers
                 );
 
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-                return Ok(new { Token = tokenString, userNickname = user.Username });
+                return Ok(new { 
+                    token = tokenString, 
+                    userNickname = user.Username, 
+                    expires = DateTimeOffset.UtcNow.AddHours(3).ToUnixTimeMilliseconds(),
+                });
             };
 
             return Unauthorized();
