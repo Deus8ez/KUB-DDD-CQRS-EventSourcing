@@ -53,9 +53,9 @@ namespace KUB.Web.Controllers
             {
                 await _participantService.UpdateParticipant(entity, request.SchoolId);
             }
-            catch (Exception ex)
+            catch 
             {
-                return StatusCode(500, ex.StackTrace);
+                return StatusCode(500);
             }
 
             return NoContent();
