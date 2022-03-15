@@ -68,7 +68,7 @@ builder.Services.AddScoped<IParticipantService, Service>();
 builder.Services.AddScoped<ISchoolService, Service>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IBaseCommandHandler, CommandHandler>();
-builder.Services.AddSqlServer<ManagementGamesDB>(configuration.GetConnectionString("LocalDB"));
+builder.Services.AddSqlServer<ManagementGamesDB>(configuration.GetConnectionString("DB"));
 builder.Services.AddSingleton(mapper);
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 {
