@@ -44,9 +44,16 @@ namespace KUB.Web.Controllers
         [HttpGet]
         public virtual async Task<IActionResult> GetItems()
         {
-            var result = await _readRepository.GetAllAsync();
+            try
+            {
+                var result = await _readRepository.GetAllAsync();
 
-            return Ok(result);
+                return Ok(result);
+            } catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
         }
 
         [HttpGet]
