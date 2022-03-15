@@ -16,7 +16,7 @@ namespace KUB.Infrastructure.Data.Repositories
         string _connectionString;
         public SchoolReadRepository(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("LocalDB");
+            _connectionString = configuration.GetConnectionString("DB");
         }
         public async Task<List<SchoolDto>> GetAllAsync()
         {

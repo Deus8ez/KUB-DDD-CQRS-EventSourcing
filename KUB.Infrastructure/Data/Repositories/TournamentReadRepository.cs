@@ -23,7 +23,7 @@ namespace KUB.Infrastructure.Data.Repositories
 
         public TournamentReadRepository(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("LocalDB");
+            _connectionString = configuration.GetConnectionString("DB");
         }
 
 

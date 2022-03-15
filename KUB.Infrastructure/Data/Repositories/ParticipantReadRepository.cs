@@ -19,7 +19,7 @@ namespace KUB.Infrastructure.Data.Repositories
 
         public ParticipantReadRepository(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("LocalDB");
+            _connectionString = configuration.GetConnectionString("DB");
         }
 
         public Task<List<ParticipantAndRolesDto>> GetAllAsync(int offset, int rowNumber)
